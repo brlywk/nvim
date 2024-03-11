@@ -1,0 +1,37 @@
+return {
+	"nvim-telescope/telescope-file-browser.nvim",
+	dependencies = {
+		"nvim-telescope/telescope.nvim",
+		"nvim-lua/plenary.nvim",
+	},
+	config = function()
+		local fb_actions = require("telescope._extensions.file_browser.actions")
+
+		require("telescope").setup({
+			extensions = {
+				file_browser = {
+					hijack_netrw = true,
+					grouped = true,
+					follow_symlinks = true,
+					mappings = {
+						["n"] = {
+							["p"] = fb_actions.goto_parent_dir,
+						},
+						["i"] = {
+							["<C-p>"] = fb_actions.goto_parent_dir,
+						},
+					},
+				},
+			},
+		})
+
+		require("telescope").load_extension("file_browser")
+
+		vim.keymap.set(
+			"n",
+			"<leader>fE",
+			":Telescope file_browser path=%:p:h select_buffer=true<CR>",
+			{ noremap = true, silent = true, desc = "File Explorer (Telescope)" }
+		)
+	end,
+}

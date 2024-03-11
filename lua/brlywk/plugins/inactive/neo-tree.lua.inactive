@@ -1,0 +1,41 @@
+return {
+	{
+		"nvim-neo-tree/neo-tree.nvim",
+		lazy = false,
+		branch = "v3.x",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-tree/nvim-web-devicons",
+			"MunifTanjim/nui.nvim",
+		},
+		keys = {
+			{
+				"<leader>fE",
+				function()
+					require("neo-tree.command").execute({
+						toggle = true,
+						reveal_force_cwd = true,
+						position = "right",
+					})
+				end,
+				desc = "File Explorer (Neo-Tree)",
+			},
+		},
+		opts = {
+			-- disable_netrw = true,
+			-- hijack_netrw = true,
+			-- popup_border_style = "single",
+			enable_git_status = true,
+			enable_diagnostics = true,
+			window = {
+				position = "right",
+				mappings = {
+					["<space>"] = "none",
+				},
+			},
+			-- filesystem = {
+			-- 	hijack_netrw_behavior = "open_default",
+			-- },
+		},
+	},
+}
