@@ -13,9 +13,7 @@ return {
 			-- configure treesitter
 			treesitter.setup({
 				-- enable syntax highlighting
-				highlight = {
-					enable = true,
-				},
+				highlight = { enable = true },
 				sync_install = false,
 				ignore_install = {},
 				modules = {},
@@ -62,7 +60,7 @@ return {
 					-- enable = true,
 					enable_autocmd = false,
 				},
-				-- auto install above language parsers
+				-- auto install language parsers for open buffers
 				auto_install = true,
 			})
 		end,
