@@ -1,5 +1,6 @@
 return {
 	"ThePrimeagen/harpoon",
+	cond = not vim.g.vscode,
 	branch = "harpoon2",
 	dependencies = { "nvim-lua/plenary.nvim" },
 	config = function()
@@ -15,14 +16,20 @@ return {
 		vim.keymap.set("n", "<space>a", function()
 			harpoon:list():append()
 		end, { desc = "Harpoon: Add File" })
+		vim.keymap.set("n", "<space>ba", function()
+			harpoon:list():append()
+		end, { desc = "Harpoon: Add File" })
+
 		-- show overview
 		vim.keymap.set("n", "<space>bm", function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end, { desc = "Harpoon: Quick Menu" })
+
 		-- next
 		vim.keymap.set("n", "<space>bn", function()
 			harpoon:list():next()
 		end, { desc = "Harpoon: Next" })
+
 		-- prev
 		vim.keymap.set("n", "<space>bN", function()
 			harpoon:list():prev()

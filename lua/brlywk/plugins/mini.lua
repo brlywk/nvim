@@ -1,5 +1,6 @@
 return {
 	"echasnovski/mini.nvim",
+	-- cond = not vim.g.vscode,
 	version = false,
 	config = function()
 		--  Removing Buffers  ------------------------------------
@@ -58,6 +59,7 @@ return {
 				miniclue.gen_clues.z(),
 
 				-- Leader Subgroups
+				{ mode = "n", keys = "<Leader><leader>", desc = "+Misc" },
 				{ mode = "n", keys = "<Leader>b", desc = "+Buffer" },
 				{ mode = "n", keys = "<Leader>c", desc = "+Code" },
 				{ mode = "n", keys = "<Leader>d", desc = "+Debug" },
@@ -67,11 +69,11 @@ return {
 				{ mode = "n", keys = "<Leader>g", desc = "+Git" },
 				{ mode = "n", keys = "<Leader>o", desc = "+Obsidian" },
 				{ mode = "n", keys = "<Leader>r", desc = "+Refactor" },
-				{ mode = "n", keys = "<Leader>v", desc = "+Session Management" },
+				{ mode = "n", keys = "<Leader>t", desc = "+Test" },
 				{ mode = "n", keys = "<Leader>w", desc = "+Window (Split)" },
 				{ mode = "n", keys = "<Leader>x", desc = "+Trouble" },
 				{ mode = "n", keys = "<Leader>y", desc = "+System Clipboard" },
-				{ mode = "n", keys = "<Leader>z", desc = "Why not Zoidberg? (/)_(;,,;)_(/)" },
+				-- { mode = "n", keys = "<Leader>z", desc = "Why not Zoidberg? (/)_(;,,;)_(/)" },
 			},
 		})
 

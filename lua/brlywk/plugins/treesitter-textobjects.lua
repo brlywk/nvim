@@ -1,5 +1,7 @@
+--- @diagnostic disable:missing-fields
 return {
 	"nvim-treesitter/nvim-treesitter-textobjects",
+	-- cond = not vim.g.vscode,
 	config = function()
 		require("nvim-treesitter.configs").setup({
 			textobjects = {
@@ -21,20 +23,20 @@ return {
 						["al"] = { query = "@loop.outer", desc = "Select outer part of a loop" },
 						["il"] = { query = "@loop.inner", desc = "Select inner part of a loop" },
 
-						["af"] = { query = "@call.outer", desc = "Select outer part of a function call" },
-						["if"] = { query = "@call.inner", desc = "Select inner part of a function call" },
+						["ac"] = { query = "@call.outer", desc = "Select outer part of a (function) call" },
+						["ic"] = { query = "@call.inner", desc = "Select inner part of a (function) call" },
 
-						["am"] = {
+						["af"] = {
 							query = "@function.outer",
-							desc = "Select outer part of a method/function definition",
+							desc = "Select outer part of a function definition",
 						},
-						["im"] = {
+						["if"] = {
 							query = "@function.inner",
-							desc = "Select inner part of a method/function definition",
+							desc = "Select inner part of a function definition",
 						},
 
-						["ac"] = { query = "@class.outer", desc = "Select outer part of a class" },
-						["ic"] = { query = "@class.inner", desc = "Select inner part of a class" },
+						["as"] = { query = "@class.outer", desc = "Select outer part of a struct (class)" },
+						["is"] = { query = "@class.inner", desc = "Select inner part of a struct (class)" },
 					},
 				},
 				move = {

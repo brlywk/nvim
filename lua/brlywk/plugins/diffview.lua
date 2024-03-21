@@ -1,5 +1,6 @@
 return {
 	"sindrets/diffview.nvim",
+	cond = not vim.g.vscode,
 	config = function()
 		vim.keymap.set("n", "<leader>gd", function()
 			if _G.diffview_open then

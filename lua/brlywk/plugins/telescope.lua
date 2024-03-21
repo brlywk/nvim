@@ -1,5 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
+	cond = not vim.g.vscode,
 	branch = "0.1.x",
 	dependencies = {
 		"nvim-lua/plenary.nvim",
@@ -49,8 +50,8 @@ return {
 		keymap.set("n", "<leader>ff", "<cmd>Telescope find_files<cr>", { desc = "Find files" })
 		keymap.set("n", "<leader>fG", "<cmd>Telescope git_files<cr>", { desc = "Find files (Git)" })
 		keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Find recent" })
-		keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find with grep" })
-		keymap.set("n", "<leader>fW", "<cmd>Telescope grep_string<cr>", { desc = "Find current word" })
+		keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find grep (live)" })
+		keymap.set("n", "<leader>fw", "<cmd>Telescope grep_string<cr>", { desc = "Find current word" })
 		keymap.set("n", "<leader>fh", "<cmd>Telescope help_tags<cr>", { desc = "Find in help" })
 	end,
 }

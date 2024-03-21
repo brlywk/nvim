@@ -5,6 +5,7 @@ return {
 	-- Easy use of Git commands
 	{
 		"tpope/vim-fugitive",
+		cond = not vim.g.vscode,
 		config = function()
 			vim.keymap.set("n", "<leader>gs", vim.cmd.Git, { desc = "Git status (fugitive)" })
 			vim.keymap.set("n", "<leader>gc", function()
@@ -14,8 +15,8 @@ return {
 	},
 
 	-- GitHub extensions for fugitive
-	{ "tpope/vim-rhubarb" },
+	{ "tpope/vim-rhubarb", cond = not vim.g.vscode },
 
 	-- Useful terminal commands within git
-	{ "tpope/vim-eunuch" },
+	{ "tpope/vim-eunuch", cond = not vim.g.vscode },
 }

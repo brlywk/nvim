@@ -1,5 +1,6 @@
 return {
 	"declancm/maximize.nvim",
+	cond = not vim.g.vscode,
 	config = function()
 		require("maximize").setup()
 

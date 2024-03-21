@@ -1,6 +1,7 @@
 --- @diagnostic disable:missing-fields
 return {
 	"epwalsh/obsidian.nvim",
+	cond = not vim.g.vscode,
 	version = "*", -- recommended, use latest release instead of latest commit
 	lazy = true,
 	event = {
@@ -9,13 +10,13 @@ return {
 		"BufReadPre /Users/christoph/Obsidian/Default/**.md",
 	},
 	keys = {
-		{ "<leader>oo", "<cmd>ObsidianOpen<CR>",                                   desc = "Open Obsidian App" },
+		{ "<leader>oo", "<cmd>ObsidianOpen<CR>", desc = "Open Obsidian App" },
 		{ "<leader>oc", "<cmd>lua require('obsidian').util.toggle_checkbox()<CR>", desc = "Toggle Obsidian Checkbox" },
-		{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>",                              desc = "Show Obsidian Backlinks" },
-		{ "<leader>ol", "<cmd>ObsidianLinks<CR>",                                  desc = "Show Obsidian Links" },
-		{ "<leader>on", "<cmd>ObsidianNew<CR>",                                    desc = "New Note" },
-		{ "<leader>os", "<cmd>ObsidianSearch<CR>",                                 desc = "Search Obsidian" },
-		{ "<leader>oq", "<cmd>ObsidianQuickSwitch<CR>",                            desc = "Quick Switch" },
+		{ "<leader>ob", "<cmd>ObsidianBacklinks<CR>", desc = "Show Obsidian Backlinks" },
+		{ "<leader>ol", "<cmd>ObsidianLinks<CR>", desc = "Show Obsidian Links" },
+		{ "<leader>on", "<cmd>ObsidianNew<CR>", desc = "New Note" },
+		{ "<leader>os", "<cmd>ObsidianSearch<CR>", desc = "Search Obsidian" },
+		{ "<leader>oq", "<cmd>ObsidianQuickSwitch<CR>", desc = "Quick Switch" },
 	},
 	dependencies = {
 		"nvim-lua/plenary.nvim",

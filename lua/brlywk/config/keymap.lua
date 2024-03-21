@@ -18,7 +18,7 @@ k.set("n", "j", "v:count == 0 ? 'gj' : 'j'", { expr = true, silent = true })
 -- buffer movement: set some keymaps (I like the way LazyVim does this)
 k.set("n", "[b", vim.cmd.bprev, { noremap = true, silent = true })
 k.set("n", "]b", vim.cmd.bnext, { noremap = true, silent = true })
-k.set("n", "<leader>'", "<C-^>", { noremap = true, silent = true, desc = "Jump to alternate buffer" })
+k.set("n", "<leader>'", "<C-^>", { noremap = true, silent = true, desc = "Alternate buffer" })
 
 -- close (delete) all buffers except the currently open ones
 k.set("n", "<leader>bQ", "<cmd>%bd|e#|bd#<CR>", { silent = true, desc = "Close all except current" })

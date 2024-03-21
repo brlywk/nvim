@@ -1,5 +1,6 @@
 return {
-  "NvChad/nvim-colorizer.lua",
-  event = { "BufReadPre", "BufNewFile" },
-  config = true,
+	"NvChad/nvim-colorizer.lua",
+	cond = not vim.g.vscode,
+	event = { "BufReadPre", "BufNewFile" },
+	config = true,
 }

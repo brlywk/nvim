@@ -1,5 +1,6 @@
 return {
 	"stevearc/conform.nvim",
+	cond = not vim.g.vscode,
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		-- define some of the sublist to make sure the faster formatter is tried first

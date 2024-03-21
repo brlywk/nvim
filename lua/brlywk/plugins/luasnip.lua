@@ -5,6 +5,7 @@ return {
 		-- dependencies = {
 		-- 	"rafamadriz/friendly-snippets",
 		-- },
+		event = "VeryLazy",
 		opts = {
 			history = true,
 			update_events = "TextChanged,TextChangedI",
@@ -13,6 +14,7 @@ return {
 			local ls = require("luasnip")
 
 			-- load snippets from snippet directory
+			--- @diagnostic disable:assign-type-mismatch
 			require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/brlywk/plugins/snippets/" })
 
 			-- some extensions for JavaScript as some snippets should

@@ -3,6 +3,7 @@ return {
 	-- i.e. automatically install the server from now on
 	{
 		"neovim/nvim-lspconfig",
+		cond = not vim.g.vscode,
 		opts = {
 			servers = {
 				tailwindcss = {
@@ -24,6 +25,7 @@ return {
 	-- more tailwind: nicer colors in auto-complete
 	{
 		"hrsh7th/nvim-cmp",
+		cond = not vim.g.vscode,
 		dependencies = {
 			"roobert/tailwindcss-colorizer-cmp.nvim",
 			config = true,
@@ -40,6 +42,7 @@ return {
 	-- also add coloring options for some stuff
 	{
 		"NvChad/nvim-colorizer.lua",
+		cond = not vim.g.vscode,
 		opts = {
 			user_default_options = {
 				tailwind = true,
@@ -50,8 +53,10 @@ return {
 	-- use tailwind-sorter
 	{
 		"laytan/tailwind-sorter.nvim",
+		cond = not vim.g.vscode,
 		dependencies = { "nvim-treesitter/nvim-treesitter", "nvim-lua/plenary.nvim" },
 		build = "cd formatter && npm i && npm run build",
+		event = "VeryLazy",
 		config = true,
 		opts = {
 			on_save_enabled = true,

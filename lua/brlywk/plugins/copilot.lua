@@ -2,6 +2,7 @@ return {
 	{
 		"zbirenbaum/copilot.lua",
 		cmd = "Copilot",
+		cond = not vim.g.vscode,
 		event = "InsertEnter",
 		opts = {
 			suggestion = { enabled = false },
@@ -29,6 +30,7 @@ return {
 
 	{
 		"zbirenbaum/copilot-cmp",
+		cond = not vim.g.vscode,
 		config = function()
 			local cmp = require("copilot_cmp")
 
@@ -57,5 +59,6 @@ return {
 	-- enable lualine integration
 	{
 		"AndreM222/copilot-lualine",
+		cond = not vim.g.vscode,
 	},
 }
