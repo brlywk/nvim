@@ -9,7 +9,7 @@ return {
 				-- for some reason lazy.nvim is HELLBENT on running a config function,
 				-- even though the plugin does not provide one.
 				-- So here you go Lazy.nvim... an empty config function just so you can
-				-- kindly fuck off
+				-- kindly f*** off
 			end,
 		},
 		"folke/neoconf.nvim",
@@ -137,106 +137,10 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		-- Custom function to organize imports for tsserver
-		local function organizeImports()
-			local params = {
-				command = "_typescript.organizeImports",
-				arguments = { vim.api.nvim_buf_get_name(0) },
-			}
-			vim.lsp.buf.execute_command(params)
-		end
-
 		-------- LSP SERVER CONFIG -----------------------
-		local server_settings = {
-			astro = {},
-			cssls = {
-				-- we need to ignore unknown @rules with tailwind...
-				-- there should be a better solution for this though
-				settings = {
-					css = {
-						validate = true,
-						lint = {
-							unknownAtRules = "ignore",
-						},
-					},
-				},
-			},
-			emmet_ls = {
-				filetypes = {
-					"html",
-					"typescriptreact",
-					"javascriptreact",
-					"css",
-					"sass",
-					"scss",
-					"less",
-					"svelte",
-					"vue",
-					"astro",
-				},
-			},
-			gopls = {},
-			html = {},
-			htmx = {},
-			lua_ls = {
-				settings = { -- custom settings for lua
-					Lua = {
-						-- make the language server recognize "vim" global
-						diagnostics = {
-							globals = { "vim" },
-						},
-						workspace = {
-							-- make language server aware of runtime files
-							library = {
-								[vim.fn.expand("$VIMRUNTIME/lua")] = true,
-								[vim.fn.stdpath("config") .. "/lua"] = true,
-							},
-						},
-					},
-				},
-			},
-			pylsp = {},
-			svelte = {},
-			rust_analyzer = {
-				settings = {
-					["rust-analyzerq"] = {
-						checkOnSave = {
-							command = "clippy",
-						},
-					},
-				},
-			},
-			tailwindcss = {},
-			taplo = {},
-			templ = {},
-			tsserver = {
-				init_options = {
-					preferences = {
-						disableSuggestions = true,
-					},
-				},
-				commands = {
-					OrganizeImports = {
-						organizeImports,
-						description = "Organize Imports",
-					},
-				},
-			},
-			typos_lsp = {},
-			volar = {},
-			yamlls = {},
-		}
 
-		-- additional settings to use in certain cases
-		-- local modified_settings = {
-		-- 	volar = {
-		-- 		filetypes = {
-		-- 			"vue",
-		-- 			"javascript",
-		-- 			"typescript",
-		-- 		},
-		-- 	},
-		-- }
+		-- load lsp server settings
+		local lsp_settings = require("brlywk.config.lsp.settings")
 
 		-- default configuration for all LSPs
 		local default_config = {
@@ -264,7 +168,7 @@ return {
 				end
 
 				-- get specific config or empty table
-				local server_config = server_settings[server_name] or {}
+				local server_config = lsp_settings.server_settings[server_name] or {}
 
 				-- merge with default settings, prioritizing specific server settings
 				server_config = vim.tbl_deep_extend("keep", server_config, default_config)

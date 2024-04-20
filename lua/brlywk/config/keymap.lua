@@ -23,11 +23,6 @@ k.set("n", "<leader>'", "<C-^>", { noremap = true, silent = true, desc = "Altern
 -- close (delete) all buffers except the currently open ones
 k.set("n", "<leader>bQ", "<cmd>%bd|e#|bd#<CR>", { silent = true, desc = "Close all except current" })
 
--- [Sometime] Switched to Mini.Move
--- In visual mode, allow J and K to move the selected text up and down
--- k.set('v', '<M-j>', ":m '>+1<CR>gv=gv")
--- k.set('v', '<M-k>', ":m '<-2<CR>gv=gv")
-
 -- keep cursor in the middle of the screen when scrolling by have pages
 k.set("n", "<C-d>", "<C-d>zz")
 k.set("n", "<C-u>", "<C-u>zz")
@@ -51,21 +46,18 @@ k.set("n", "<C-l>", "<C-w>l")
 k.set("n", "<C-j>", "<C-w>j")
 k.set("n", "<C-k>", "<C-w>k")
 
--- [2024-04-15] Currently using unnamedplus clipboard
--- pasting from system clipboard (default commands with prefix <leader>)
--- k.set("n", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
--- k.set("v", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
--- k.set("n", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
--- k.set("v", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
-
--- same for yanking
--- k.set("n", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
--- k.set("v", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
-
 -- allows replacement of the current word under the cursor
-vim.keymap.set(
+k.set(
 	"n",
 	"<leader>ra",
 	[[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]],
-	{ desc = "Replace all word occurences" }
+	{ desc = "Replace all word occurrences" }
+)
+
+-- special shortcut for Vue, as eslint_d for Vue needs flat config support enabled
+k.set(
+	"n",
+	"<leader>cV",
+	"<cmd>!ESLINT_USE_FLAT_CONFIG=true eslint_d restart<CR>",
+	{ desc = "Enable eslint_d Vue override" }
 )
