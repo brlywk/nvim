@@ -24,6 +24,9 @@ opt.undofile = true
 -- save undo history for almost infinite undoing
 opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
+-- use system clipboard
+opt.clipboard = "unnamedplus"
+
 -- disable backups and swaps
 opt.swapfile = false
 opt.backup = false
@@ -34,6 +37,9 @@ opt.smartcase = true
 
 -- keep signcolumn enabled
 opt.signcolumn = "yes"
+
+-- don't show mode in command line
+opt.showmode = false
 
 -- better completion experience
 opt.completeopt = "menuone,noselect"
@@ -47,6 +53,12 @@ opt.incsearch = true
 
 -- set how many characters should always be visible below when scrolling down
 opt.scrolloff = 8
+
+-- decrease update time (when swap will be written)
+opt.updatetime = 250
+
+-- decrease mapped sequence timeout (will display mini.clue sooner)
+opt.timeoutlen = 300
 
 -- set line length 'indicator'
 opt.colorcolumn = "100"

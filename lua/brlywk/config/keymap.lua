@@ -4,7 +4,7 @@ vim.g.maplocallebder = " "
 
 local k = vim.keymap
 
--- I don't think I ever want top (accidentally) repeat macros multiple times
+-- I don't think I ever want to (accidentally) repeat macros multiple times
 k.set("n", "Q", "<Nop>", { noremap = true, silent = true })
 k.set("n", "@@", "<Nop>", { noremap = true, silent = true })
 
@@ -23,7 +23,7 @@ k.set("n", "<leader>'", "<C-^>", { noremap = true, silent = true, desc = "Altern
 -- close (delete) all buffers except the currently open ones
 k.set("n", "<leader>bQ", "<cmd>%bd|e#|bd#<CR>", { silent = true, desc = "Close all except current" })
 
--- HANDLED BY MINI.MOVE:
+-- [Sometime] Switched to Mini.Move
 -- In visual mode, allow J and K to move the selected text up and down
 -- k.set('v', '<M-j>', ":m '>+1<CR>gv=gv")
 -- k.set('v', '<M-k>', ":m '<-2<CR>gv=gv")
@@ -39,18 +39,11 @@ k.set("n", "N", "Nzzzv")
 -- delete single characters to void
 k.set("n", "x", '"_x')
 
--- some convenient INSERT mode commands
--- k.set("i", "<C-h>", "<Left>")
--- k.set("i", "<C-l>", "<Right>")
--- k.set("i", "<C-j>", "<Down>")
--- k.set("i", "<C-k>", "<Up>")
--- k.set("i", "<C-b>", "<C-o>_")
-
 -- window management
 k.set("n", "<leader>wv", "<C-w>v", { desc = "[W]indow: Split [v]vertically" })
 k.set("n", "<leader>wh", "<C-w>s", { desc = "[W]indow: Split [h]orizontaly" })
 k.set("n", "<leader>wx", "<cmd>close<CR>", { desc = "[W]indow: Close" })
-k.set("n", "<leader>wX", "<C-w>o", { desc = "Close All Other Windows" })
+k.set("n", "<leader>wo", "<C-w>o", { desc = "Close all other windows" })
 
 -- easier movement between windows
 k.set("n", "<C-h>", "<C-w>h")
@@ -58,15 +51,16 @@ k.set("n", "<C-l>", "<C-w>l")
 k.set("n", "<C-j>", "<C-w>j")
 k.set("n", "<C-k>", "<C-w>k")
 
+-- [2024-04-15] Currently using unnamedplus clipboard
 -- pasting from system clipboard (default commands with prefix <leader>)
-k.set("n", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
-k.set("v", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
-k.set("n", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
-k.set("v", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
+-- k.set("n", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
+-- k.set("v", "<leader>yp", '"+p', { noremap = true, silent = true, desc = "Paste from clipboard" })
+-- k.set("n", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
+-- k.set("v", "<leader>yP", '"+P', { noremap = true, silent = true, desc = "Paste from clipboard" })
 
 -- same for yanking
-k.set("n", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
-k.set("v", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
+-- k.set("n", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
+-- k.set("v", "<leader>yy", '"+y', { noremap = true, silent = true, desc = "Yank to clipboard" })
 
 -- allows replacement of the current word under the cursor
 vim.keymap.set(

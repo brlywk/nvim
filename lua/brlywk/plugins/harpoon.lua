@@ -14,14 +14,17 @@ return {
 
 		-- add to list
 		vim.keymap.set("n", "<space>a", function()
-			harpoon:list():append()
+			harpoon:list():add()
 		end, { desc = "Harpoon: Add File" })
 		vim.keymap.set("n", "<space>ba", function()
-			harpoon:list():append()
+			harpoon:list():add()
 		end, { desc = "Harpoon: Add File" })
 
 		-- show overview
 		vim.keymap.set("n", "<space>bm", function()
+			harpoon.ui:toggle_quick_menu(harpoon:list())
+		end, { desc = "Harpoon: Quick Menu" })
+		vim.keymap.set("n", "<space>bh", function()
 			harpoon.ui:toggle_quick_menu(harpoon:list())
 		end, { desc = "Harpoon: Quick Menu" })
 

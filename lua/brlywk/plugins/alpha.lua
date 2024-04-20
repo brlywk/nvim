@@ -47,7 +47,7 @@ return {
 			type = "group",
 			val = {
 				{ type = "padding", val = 1 },
-				{ type = "text",    val = greeting, opts = { hl = "qfLineNr", position = "center" } },
+				{ type = "text", val = greeting, opts = { hl = "qfLineNr", position = "center" } },
 				{ type = "padding", val = 1 },
 			},
 			position = "center",
@@ -61,7 +61,7 @@ return {
 			dashboard.button("r", "    recent files", ":Telescope oldfiles<CR>"),
 			dashboard.button("f", "󰥨    find file", ":Telescope find_files<CR>"),
 			dashboard.button("s", "󰱼    find text", ":Telescope live_grep<CR>"),
-			dashboard.button("g", "    open git", ":LazyGit<CR>"),
+			-- dashboard.button("g", "    open git", ":LazyGit<CR>"),
 			dashboard.button("l", "    lazy", ":Lazy<CR>"),
 			dashboard.button("c", "    config", ":e ~/.config/nvim<CR>"),
 			dashboard.button("q", "󰩈    quit", ":qa<CR>"),

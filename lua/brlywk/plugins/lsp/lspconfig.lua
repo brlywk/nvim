@@ -228,15 +228,15 @@ return {
 		}
 
 		-- additional settings to use in certain cases
-		local modified_settings = {
-			volar = {
-				filetypes = {
-					"vue",
-					"javascript",
-					"typescript",
-				},
-			},
-		}
+		-- local modified_settings = {
+		-- 	volar = {
+		-- 		filetypes = {
+		-- 			"vue",
+		-- 			"javascript",
+		-- 			"typescript",
+		-- 		},
+		-- 	},
+		-- }
 
 		-- default configuration for all LSPs
 		local default_config = {
@@ -251,9 +251,9 @@ return {
 
 		-- conceptually these settings should probably be loaded from the actual
 		-- config file, but I only have one use case for this right now...
-		local function is_modified(cond_server_name)
-			return neoconf.get(cond_server_name .. ".modify")
-		end
+		-- local function is_modified(cond_server_name)
+		-- 	return neoconf.get(cond_server_name .. ".modify")
+		-- end
 
 		-- setup lsp servers
 		mason_lspconfig.setup_handlers({
@@ -270,8 +270,11 @@ return {
 				server_config = vim.tbl_deep_extend("keep", server_config, default_config)
 
 				-- if neoconf indicates modified settings, merge these in, too
-				if is_modified(server_name) and vim.tbl_get(modified_settings, server_name) then
-					server_config = vim.tbl_deep_extend("force", server_config, modified_settings[server_name])
+				-- if is_modified(server_name) and vim.tbl_get(modified_settings, server_name) then
+				local modified_settings = neoconf.get(server_name, {})
+				if not vim.tbl_isempty(modified_settings) then
+					server_config = vim.tbl_deep_extend("force", server_config, modified_settings)
+					-- print(server_name .. " config: " .. vim.inspect(server_config))
 				end
 
 				-- run lspconfig for server

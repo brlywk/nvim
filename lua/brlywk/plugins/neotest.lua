@@ -3,6 +3,7 @@ return {
 	cond = not vim.g.vscode,
 	dependencies = {
 		"nvim-lua/plenary.nvim",
+		"nvim-neotest/nvim-nio",
 		"antoinemadec/FixCursorHold.nvim",
 		"nvim-treesitter/nvim-treesitter",
 		-- adapters

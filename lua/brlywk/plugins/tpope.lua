@@ -19,4 +19,16 @@ return {
 
 	-- Useful terminal commands within git
 	{ "tpope/vim-eunuch", cond = not vim.g.vscode },
+
+	-- surround commands
+	-- { "tpope/vim-surround", cond = not vim.g.vscode },
+	-- not tpope, but a newer replacement specifically for nvim
+	{
+		"kylechui/nvim-surround",
+		version = "*",
+		event = "VeryLazy",
+		config = function()
+			require("nvim-surround").setup({})
+		end,
+	},
 }

@@ -26,14 +26,22 @@ return {
 		})
 
 		-- basic keymap
-		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Start/Continue" })
+		vim.keymap.set("n", "<F5>", dap.continue, { desc = "Debug: Run/Continue" })
+		vim.keymap.set("n", "<leader>dr", dap.continue, { desc = "Debug: Run/Continue (F5)" })
+
 		vim.keymap.set("n", "<F1>", dap.step_into, { desc = "Debug: Step Into" })
-		vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+		vim.keymap.set("n", "<leader>di", dap.step_into, { desc = "Debug: Step Into (F1)" })
+
 		vim.keymap.set("n", "<F3>", dap.step_out, { desc = "Debug: Step Out" })
+		vim.keymap.set("n", "<leader>do", dap.step_out, { desc = "Debug: Step Out (F3)" })
+
+		vim.keymap.set("n", "<F2>", dap.step_over, { desc = "Debug: Step Over" })
+		vim.keymap.set("n", "<leader>ds", dap.step_over, { desc = "Debug: Step Over (F2)" })
+
 		vim.keymap.set("n", "<leader>db", dap.toggle_breakpoint, { desc = "Debug: Toggle Breakpoint" })
 		vim.keymap.set("n", "<leader>dB", function()
 			dap.set_breakpoint(vim.fn.input("Breakpoint condition: "))
-		end, { desc = "Debug: Set Breakpoint" })
+		end, { desc = "Debug: Set Conditional Breakpoint" })
 
 		-- Dap UI setup
 		-- For more information, see |:help nvim-dap-ui|
@@ -63,5 +71,6 @@ return {
 
 		-- Install golang specific config
 		require("dap-go").setup()
+		vim.keymap.set("n", "<leader>td", ":lua require('dap-go').debug_test()<CR>", { desc = "Test Debug" })
 	end,
 }

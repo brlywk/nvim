@@ -96,7 +96,8 @@ return {
 		require("mini.splitjoin").setup()
 
 		-- Super amazing surround mappings ----------------------------------
-		require("mini.surround").setup()
+		-- [2024-04-17] moved to tpope/vim-surround to have a more 'vim like' experience
+		-- require("mini.surround").setup()
 
 		-- Extended functionality for a/i ---------------------------------
 		require("mini.ai").setup({ n_lines = 500 })
