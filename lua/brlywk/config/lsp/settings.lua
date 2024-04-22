@@ -86,7 +86,36 @@ M.server_settings = {
 		},
 	},
 	typos_lsp = {},
-	volar = {},
+	volar = {
+		-- Add the following config to the .neoconf.json in every Vue project folder
+		-- {
+		-- 	"tsserver": {
+		-- 		"disable": true
+		-- 	},
+		-- 	"volar": {
+		-- 		"filetypes": [
+		-- 			"vue",
+		-- 			"javasript",
+		-- 			"typescript",
+		-- 			"json",
+		-- 			"javascriptreact",
+		-- 			"typescriptreact"
+		-- 		]
+		-- 	}
+		-- }
+
+		-- Volar seems to have some serious issues with typescript at the moment, i.e.
+		-- takeover mode not working 'out of the box', so we need to add the following
+		-- options to make it actually work properly
+		init_options = {
+			vue = {
+				hybridMode = false,
+			},
+			typescript = {
+				tsdk = vim.fn.getcwd() .. "node_modules/typescript/lib",
+			},
+		},
+	},
 	yamlls = {},
 }
 
