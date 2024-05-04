@@ -95,7 +95,7 @@ M.server_settings = {
 		-- 	"volar": {
 		-- 		"filetypes": [
 		-- 			"vue",
-		-- 			"javasript",
+		-- 			"javascript",
 		-- 			"typescript",
 		-- 			"json",
 		-- 			"javascriptreact",

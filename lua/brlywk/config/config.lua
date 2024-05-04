@@ -67,7 +67,7 @@ opt.colorcolumn = "100"
 opt.fillchars = { eob = " " }
 
 -- Add filename to top of open buffer
-opt.winbar = "%=%m %f"
+-- opt.winbar = "%=%m %f"
 
 -- split windows to the right and bottom
 opt.splitright = true

@@ -68,6 +68,9 @@ return {
 		------- LspConfig -------------------------------
 		local lspconfig = require("lspconfig")
 
+		-- load lsp server settings
+		local lsp_settings = require("brlywk.config.lsp.settings")
+
 		-- globally override floating windows to have a border
 		local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
 		function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
@@ -82,7 +85,7 @@ return {
 		local keymap = vim.keymap
 		local opts = { noremap = true, silent = true }
 
-		local on_attach = function(_, bufnr)
+		local on_attach = function(client, bufnr)
 			opts.buffer = bufnr
 
 			-- set keybinds
@@ -124,6 +127,15 @@ return {
 
 			opts.desc = "Signature Help"
 			keymap.set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+
+			-- also attach navic if it is installed
+			local navic_installed, navic = pcall(require, "nvim-navic")
+
+			if navic_installed then
+				if client.server_capabilities.documentSymbolProvider then
+					navic.attach(client, bufnr)
+				end
+			end
 		end
 
 		-- used to enable autocompletion (assign to every lsp server config)
@@ -138,9 +150,6 @@ return {
 		end
 
 		-------- LSP SERVER CONFIG -----------------------
-
-		-- load lsp server settings
-		local lsp_settings = require("brlywk.config.lsp.settings")
 
 		-- default configuration for all LSPs
 		local default_config = {
