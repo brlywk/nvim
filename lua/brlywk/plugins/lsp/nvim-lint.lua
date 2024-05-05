@@ -8,16 +8,21 @@ return {
 	config = function()
 		local lint = require("lint")
 
+		-- NOTE: eslint_d does not seem to have received updates in some time, so
+		-- use eslint for linting again; NEEDS TO BE INSTALLED AS A DEV DEPENDENCY THOUGH!
+		local eslint = "eslint"
+
 		-- configure linters
 		lint.linters_by_ft = {
-			javascript = { "eslint_d" },
-			typescript = { "eslint_d" },
-			javascriptreact = { "eslint_d" },
-			typescriptreact = { "eslint_d" },
-			-- svelte = { "eslint_d" },
-			vue = { "eslint_d" },
-			astro = { "eslint_d" },
-			-- python = { "pylint" },
+			javascript = { eslint },
+			typescript = { eslint },
+			javascriptreact = { eslint },
+			typescriptreact = { eslint },
+
+			vue = { eslint },
+			astro = { eslint },
+			svelte = { eslint },
+
 			go = { "golangcilint" },
 		}
 
