@@ -19,7 +19,7 @@ return {
 			javascriptreact = { eslint },
 			typescriptreact = { eslint },
 
-			vue = { eslint },
+			vue = { "biomejs" },
 			astro = { eslint },
 			svelte = { eslint },
 

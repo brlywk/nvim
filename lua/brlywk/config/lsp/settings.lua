@@ -12,6 +12,7 @@ end
 -- LSP server settings
 M.server_settings = {
 	astro = {},
+	biome = {},
 	cssls = {
 		-- we need to ignore unknown @rules with tailwind...
 		-- there should be a better solution for this though
@@ -87,6 +88,9 @@ M.server_settings = {
 	},
 	typos_lsp = {},
 	volar = {
+		-- The following dependencies need to be installed for Vue:
+		--		biome
+		--
 		-- Add the following config to the .neoconf.json in every Vue project folder
 		-- {
 		-- 	"tsserver": {

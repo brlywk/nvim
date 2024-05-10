@@ -5,8 +5,6 @@ return {
 	config = function()
 		-- define some of the sublist to make sure the faster formatter is tried first
 		local prettier = { "prettierd", "prettier" }
-		local eslint = { "eslint_d", "eslint" }
-		local slow_format_filetypes = {}
 
 		require("conform").setup({
 			formatters_by_ft = {
@@ -21,9 +19,9 @@ return {
 
 				astro = { prettier },
 				svelte = { prettier },
-				vue = { eslint },
+				vue = { "biome" },
 
-				json = prettier,
+				json = { prettier },
 				markdown = prettier,
 				yaml = { "yamlfix" },
 				toml = { "taplo" },
