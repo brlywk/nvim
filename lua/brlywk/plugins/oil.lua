@@ -25,8 +25,9 @@ return {
 				is_hidden_file = function(name, _)
 					local startsWithDot = vim.startswith(name, ".")
 					local nodeModules = vim.startswith(name, "node_modules")
+					local rustBuilds = vim.startswith(name, "target")
 
-					return startsWithDot or nodeModules
+					return startsWithDot or nodeModules or rustBuilds
 				end,
 			},
 		})
