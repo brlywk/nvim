@@ -29,16 +29,24 @@ return {
 		local lint_augroup = vim.api.nvim_create_augroup("lint", { clear = true })
 
 		-- automatically trigger linting
-		vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
-			group = lint_augroup,
-			callback = function()
-				lint.try_lint()
-			end,
-		})
+		if linter_active then
+			vim.api.nvim_create_autocmd({ "BufEnter", "BufWritePost", "InsertLeave" }, {
+				group = lint_augroup,
+				callback = function()
+					-- use neoconf to check if linter should be attached or not
+					local neoconf = require("neoconf")
+					neoconf.setup({})
+					local linter_active = neoconf.get("linter", { linter = true })
+					if linter_active then
+						lint.try_lint()
+					end
+				end,
+			})
 
-		-- set keymap for manual linting
-		vim.keymap.set("n", "<leader>cl", function()
-			lint.try_lint()
-		end, { desc = "Lint current file" })
+			-- set keymap for manual linting
+			vim.keymap.set("n", "<leader>cl", function()
+				lint.try_lint()
+			end, { desc = "Lint current file" })
+		end
 	end,
 }

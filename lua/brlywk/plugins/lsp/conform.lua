@@ -4,7 +4,7 @@ return {
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
 		-- define some of the sublist to make sure the faster formatter is tried first
-		local prettier = { "prettierd", "prettier" }
+		local prettier = { "prettierd", "prettier", "tsserver" }
 
 		require("conform").setup({
 			formatters_by_ft = {
@@ -34,6 +34,7 @@ return {
 			format_on_save = {
 				timeout_ms = 500,
 				lsp_fallback = true,
+				quiet = true,
 			},
 		})
 

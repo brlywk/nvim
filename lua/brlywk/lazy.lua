@@ -32,6 +32,9 @@ require("lazy").setup({
 		},
 		border = "single",
 	},
+	change_detection = {
+		notify = false,
+	},
 	-- dev = {
 	-- 	path = "/Users/christoph/Programming/Misc/nvim_plugins",
 	-- },
