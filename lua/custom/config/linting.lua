@@ -21,16 +21,11 @@ lint.linters_by_ft = {
 local neoconf = require "neoconf"
 local should_lint = neoconf.get("linter", { linter = true })
 
+-- check if language specific linter should run
 if should_lint then
     vim.api.nvim_create_autocmd({ "BufWritePost" }, {
         callback = function()
-            -- by filetype
             lint.try_lint()
-
-            -- always run spellcheck
-            if require("mason-registry").is_installed "codespell" then
-                lint.try_lint "codespell"
-            end
         end,
     })
 
@@ -38,4 +33,14 @@ if should_lint then
     vim.keymap.set("n", "<leader>cl", function()
         lint.try_lint()
     end, { desc = "Lint file" })
+end
+
+-- check if spellchecking is installed and run spellcheck
+if require("mason-registry").is_installed "codespell" then
+    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+        callback = function()
+            -- always run spellcheck
+            lint.try_lint "codespell"
+        end,
+    })
 end
