@@ -17,7 +17,7 @@ lint.linters_by_ft = {
 }
 
 -- linter and keymap should only be active / set if linting is enabled,
--- i.e. linting has not been explicitely disabled in a project config
+-- i.e. linting has not been explicitly disabled in a project config
 local neoconf = require "neoconf"
 local should_lint = neoconf.get("linter", { linter = true })
 
@@ -28,7 +28,9 @@ if should_lint then
             lint.try_lint()
 
             -- always run spellcheck
-            lint.try_lint "codespell"
+            if require("mason-registry").is_installed "codespell" then
+                lint.try_lint "codespell"
+            end
         end,
     })
 
