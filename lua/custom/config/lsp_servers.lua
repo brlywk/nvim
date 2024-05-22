@@ -87,7 +87,7 @@ M.on_attach = function(client, bufnr)
     opts.desc = "Format with server"
     set("n", "<leader>cF", vim.lsp.buf.format, opts)
     opts.desc = "Restart server"
-    set("n", "<leader>cL", "<cmd>LspRestart<CR>", opts)
+    set("n", "<leader>cR", "<cmd>LspRestart<CR>", opts)
     opts.desc = "Rename symbol"
     set("n", "<leader>cr", vim.lsp.buf.rename, opts)
 

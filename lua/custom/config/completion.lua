@@ -44,12 +44,15 @@ cmp.setup {
 
     -- add lspkind icons to completion menu
     formatting = {
-        format = lspkind.cmp_format {
-            mode = "symbol",
-            maxwidth = 50,
-            ellipsis_char = "...",
-            show_labelDetail = true,
-        },
+        fields = { "kind", "abbr", "menu" },
+        format = function(entry, vim_item)
+            local kind = require("lspkind").cmp_format { mode = "symbol_text", maxwidth = 50 }(entry, vim_item)
+            local strings = vim.split(kind.kind, "%s", { trimempty = true })
+            kind.kind = " " .. (strings[1] or "") .. " "
+            kind.menu = "  (" .. (strings[2] or "") .. ")"
+
+            return kind
+        end,
     },
 }
 
