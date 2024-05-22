@@ -19,6 +19,27 @@ set("n", "<C-u>", "<C-u>zz")
 set("n", "n", "nzzzv")
 set("n", "N", "Nzzzv")
 
+-- for screensharing: show cursorcolumn and cursorline
+set("n", "<leader><leader>=", function()
+    local visible = _G.brlywk_crosshair_enabled or false
+    vim.opt.cursorcolumn = not visible
+    vim.opt.cursorline = not visible
+    _G.brlywk_crosshair_enabled = not visible
+end, { noremap = true, silent = true, desc = "Show cursor crosshair" })
+
+set("n", "<leader><leader>-", function()
+    local visible = _G.brlywk_line_enabled or false
+    vim.opt.cursorline = not visible
+    _G.brlywk_line_enabled = not visible
+end, { noremap = true, silent = true, desc = "Show cursor line" })
+
+set("n", "<leader><leader>\\", function()
+    local visible = _G.brlywk_column_enabled or false
+
+    vim.opt.cursorcolumn = not visible
+    _G.brlywk_column_enabled = not visible
+end, { noremap = true, silent = true, desc = "Show cursor column" })
+
 ----- Buffer management -----
 
 -- move between buffers

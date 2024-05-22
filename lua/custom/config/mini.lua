@@ -65,7 +65,6 @@ miniclue.setup {
         { mode = "n", keys = "<Leader>t", desc = "+Test" },
         { mode = "n", keys = "<Leader>w", desc = "+Window (Split)" },
         { mode = "n", keys = "<Leader>x", desc = "+Trouble" },
-        { mode = "n", keys = "<Leader>y", desc = "+System Clipboard" },
     },
 }
 
