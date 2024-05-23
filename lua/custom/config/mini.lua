@@ -80,7 +80,8 @@ require("mini.move").setup()
 --		gx	Exchange text regions (gxx for single line)
 --		gm	Duplicate line (gmm single line)
 --		gs	Sort text (selection)
-require("mini.operators").setup()
+local operators = require "mini.operators"
+operators.make_mappings("replace", { textobject = "cr", line = "crr", selection = "cr" })
 
 -- Splits / Joings (expands) argument lists ----------------------------------
 -- Keymap: gS
