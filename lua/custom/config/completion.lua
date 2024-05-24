@@ -13,6 +13,14 @@ local luasnip = require "luasnip"
 local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
 cmp.setup {
+    -- don't preselect any suggestions
+    preselect = cmp.PreselectMode.None,
+
+    -- completio options
+    completion = {
+        completeopt = "menuone,noselect,noinsert,preview",
+    },
+
     -- completion sources
     sources = {
         -- "default" sources
@@ -32,7 +40,7 @@ cmp.setup {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-p>"] = cmp.mapping.select_prev_item(cmp_select),
         ["<C-n>"] = cmp.mapping.select_next_item(cmp_select),
-        ["<C-y>"] = cmp.mapping.confirm { select = true },
+        ["<C-y>"] = cmp.mapping.confirm { select = true, behavior = cmp.ConfirmBehavior.Insert },
     },
 
     -- make lsp snippets available
@@ -99,6 +107,7 @@ local config_dir = vim.fn.stdpath "config"
 --- @diagnostic disable: param-type-mismatch
 local snippet_dir = vim.fs.joinpath(config_dir, "lua/custom/snippets")
 -- load snippets from snippet directory
+--- @diagnostic disable: assign-type-mismatch
 require("luasnip.loaders.from_lua").load { paths = snippet_dir }
 
 -- some snippets can be reused in other filetypes (e.g. JS and TS)
