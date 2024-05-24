@@ -14,12 +14,13 @@ lint.linters_by_ft = {
     typescriptreact = { eslint },
 
     astro = { eslint },
+    volar = { eslint },
 }
 
 -- linter and keymap should only be active / set if linting is enabled,
 -- i.e. linting has not been explicitly disabled in a project config
 local neoconf = require "neoconf"
-local should_lint = neoconf.get("linter", { linter = true })
+local should_lint = neoconf.get "linter" or true
 
 -- check if language specific linter should run
 if should_lint then

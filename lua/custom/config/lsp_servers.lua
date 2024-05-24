@@ -1,28 +1,16 @@
 local M = {}
 
------ additional server functionalities -----
-
--- extended organize imports functionality of tsserver
--- M.organize_imports = function()
---     local params = {
---         command = "_typescript.organizeImports",
---         arguments = { vim.api.nvim_buf_get_name(0) },
---     }
---     vim.lsp.buf.execute_command(params)
--- end
-
 ----- server settings -----
 
 -- lspconfig: per server configuration
 M.server_settings = {
     astro = {},
     cssls = {
-        -- we need to ignore unknown @rules with tailwind...
-        -- there should be a better solution for this though
         settings = {
             css = {
                 validate = true,
                 lint = {
+                    -- to not show @tailwind rules as warnings
                     unknownAtRules = "ignore",
                 },
             },
@@ -41,7 +29,6 @@ M.server_settings = {
     },
     lua_ls = {},
     rust_analyzer = {},
-    svelte = {},
     tailwindcss = {},
     taplo = {},
     templ = {},
@@ -51,12 +38,17 @@ M.server_settings = {
                 disableSuggestions = true,
             },
         },
-        -- commands = {
-        --     OrganizeImports = {
-        --         M.organize_imports,
-        --         description = "Organize Imports",
-        --     },
-        -- },
+    },
+    volar = {
+        init_options = {
+            vue = {
+                hybridMode = false,
+            },
+            typescript = {
+                -- volar seems to have issue finding typescript
+                tsdk = vim.fn.getcwd() .. "/node_modules/typescript/lib",
+            },
+        },
     },
     yamlls = {
         settings = {

@@ -4,7 +4,8 @@
 require("neodev").setup {}
 
 -- neoconf needs to be run before any lsp server config
-require("neoconf").setup {}
+local neoconf = require "neoconf"
+neoconf.setup {}
 
 -- same for fidget
 require("fidget").setup {
@@ -32,13 +33,50 @@ require("mason-tool-installer").setup { ensure_installed = lsp_settings.ensure_i
 
 -- config lsp servers
 local lspconfig = require "lspconfig"
+local mason_lspconfig = require "mason-lspconfig"
 
-for name, server_config in pairs(lsp_settings.server_settings) do
-    server_config = vim.tbl_deep_extend(
-        "force",
-        {},
-        { capabilities = capabilities, on_attach = lsp_settings.on_attach },
-        server_config
-    )
-    lspconfig[name].setup(server_config)
-end
+mason_lspconfig.setup_handlers {
+    function(server_name)
+        -- skip if server is disabled via neoconf
+        if neoconf.get(server_name .. ".disable") then
+            return
+        end
+
+        local server_config = vim.tbl_deep_extend(
+            "force",
+            {},
+            { capabilities = capabilities, on_attach = lsp_settings.on_attach },
+            lsp_settings.server_settings[server_name]
+        )
+
+        -- VUE: we also need typescript and javascript to be handled by volar
+        if server_name == "volar" then
+            server_config.filetypes = { "vue", "typescript", "javascript" }
+        end
+
+        lspconfig[server_name].setup(server_config)
+    end,
+}
+
+-- for name, server_config in pairs(lsp_settings.server_settings) do
+--     -- VUE: we need to check if tsserver needs to be disabled (needs to be checked in neoconf)
+--     -- local is_enabled = neoconf.get(name .. ".disable") or true
+--     -- print("server: " .. name .. " should be enabled? " .. tostring(is_enabled))
+--
+--     server_config = vim.tbl_deep_extend(
+--         "force",
+--         {},
+--         { capabilities = capabilities, on_attach = lsp_settings.on_attach },
+--         server_config
+--     )
+--
+--     -- VUE: we also need typescript and javascript to be handled by volar
+--     if name == "volar" then
+--         print "volar detected"
+--         server_config.filetypes = { "vue", "typescript", "javascript" }
+--     end
+--
+--     -- if is_enabled then
+--     lspconfig[name].setup(server_config)
+--     -- end
+-- end
