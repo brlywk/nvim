@@ -70,6 +70,10 @@ miniclue.setup {
 
 --  Highlight Word under cursor  ------------------------------------
 require("mini.cursorword").setup()
+-- set active word to underline only
+vim.api.nvim_set_hl(0, "MiniCursorwordCurrent", { fg = "NONE", bg = "NONE", underline = true })
+-- set all other occurrences to underline
+vim.api.nvim_set_hl(0, "MiniCursorword", { fg = "NONE", bg = "NONE", underline = true })
 
 --  Move text chunks around with Alt = hjkl  ------------------------------------
 require("mini.move").setup()
