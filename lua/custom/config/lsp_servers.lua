@@ -16,9 +16,21 @@ local M = {}
 -- lspconfig: per server configuration
 M.server_settings = {
     astro = {},
-    cssls = {},
+    cssls = {
+        -- we need to ignore unknown @rules with tailwind...
+        -- there should be a better solution for this though
+        settings = {
+            css = {
+                validate = true,
+                lint = {
+                    unknownAtRules = "ignore",
+                },
+            },
+        },
+    },
     emmet_ls = {},
     gopls = {},
+    html = {},
     jsonls = {
         settings = {
             json = {
@@ -29,6 +41,7 @@ M.server_settings = {
     },
     lua_ls = {},
     rust_analyzer = {},
+    svelte = {},
     tailwindcss = {},
     taplo = {},
     templ = {},

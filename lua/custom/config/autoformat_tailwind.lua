@@ -6,6 +6,7 @@ require("tailwind-sorter").setup {
         "*.html",
         "*.js",
         "*.jsx",
+        "*.svelte",
         "*.tsx",
         "*.ts",
     },
