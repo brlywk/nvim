@@ -5,6 +5,16 @@ local M = {}
 -- lspconfig: per server configuration
 M.server_settings = {
     astro = {},
+    -- not really an lsp, but starts crying if it doesn't get a proper config...
+    biome = {
+        root_dir = function(dir_name)
+            local util = require "lspconfig.util"
+            return util.root_pattern("biome.json", "biome.jsonc")(dir_name)
+                or util.find_package_json_ancestor(dir_name)
+                or util.find_node_modules_ancestor(dir_name)
+                or util.find_git_ancestor(dir_name)
+        end,
+    },
     cssls = {
         settings = {
             css = {
@@ -40,6 +50,7 @@ M.server_settings = {
         },
     },
     volar = {
+        filetypes = { "vue" },
         init_options = {
             vue = {
                 hybridMode = false,

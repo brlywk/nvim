@@ -6,8 +6,9 @@ return {
         "williamboman/mason-lspconfig.nvim",
         "WhoIsSethDaniel/mason-tool-installer.nvim",
 
-        -- Neodev
+        -- Neodev and Neoconf
         "folke/neodev.nvim",
+        "folke/neoconf.nvim",
 
         -- Schemas
         "b0o/SchemaStore.nvim",

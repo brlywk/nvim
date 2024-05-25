@@ -6,42 +6,45 @@ local eslint = "eslint"
 
 lint.linters_by_ft = {
     go = { "golangcilint" },
-    -- lua = { "luacheck" }, -- needs luarocks installed
 
     javascript = { eslint },
     javascriptreact = { eslint },
     typescript = { eslint },
     typescriptreact = { eslint },
 
-    astro = { eslint },
-    volar = { eslint },
+    vue = { "biomejs" }, -- isn't it wonderful that the formatter is called "biome" but the linter "biomejs"?
 }
 
 -- linter and keymap should only be active / set if linting is enabled,
 -- i.e. linting has not been explicitly disabled in a project config
 local neoconf = require "neoconf"
-local should_lint = neoconf.get "linter" or true
+local linter_conf = neoconf.get "linter" or {}
+local disabled_linter = neoconf.get "linter.disable" or ""
+local linters_for_ft = FILTER_OUT_KEYS(linter_conf, "disable")
 
 -- check if language specific linter should run
-if should_lint then
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        callback = function()
-            lint.try_lint()
-        end,
-    })
+vim.api.nvim_create_autocmd({ "BufWritePost" }, {
+    callback = function(args)
+        local ft = vim.api.nvim_get_option_value("filetype", { buf = args.buf })
 
-    -- keymaps
-    vim.keymap.set("n", "<leader>cl", function()
+        -- explicitly return if this filetypes linter has been disabled
+        local ft_linters = lint.linters_by_ft[ft] or {}
+        if #vim.tbl_keys(lint.linters_by_ft) > 0 and vim.list_contains(ft_linters, disabled_linter) then
+            return
+        end
+
+        -- overwrite linters by ft if found in neoconf config
+        if #vim.tbl_keys(linters_for_ft) > 0 then
+            for ft_name, linter_overwrite in pairs(linters_for_ft) do
+                lint.linters_by_ft[ft_name] = { linter_overwrite }
+            end
+        end
+
         lint.try_lint()
-    end, { desc = "Lint file" })
-end
 
--- check if spellchecking is installed and run spellcheck
-if require("mason-registry").is_installed "codespell" then
-    vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-        callback = function()
-            -- always run spellcheck
-            lint.try_lint "codespell"
-        end,
-    })
-end
+        -- set keymap if a linter is found and ready
+        vim.keymap.set("n", "<leader>cl", function()
+            lint.try_lint()
+        end, { desc = "Lint file" })
+    end,
+})

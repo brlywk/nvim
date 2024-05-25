@@ -29,3 +29,17 @@ CHECK_GIT = function()
     local git_dir = vim.fn.finddir(".git", ".;")
     return git_dir ~= ""
 end
+
+-- vim.tbl_filter() does not really do what I need for some things
+FILTER_OUT_KEYS = function(table, ...)
+    local remove_keys = { ... }
+    local filtered_table = {}
+
+    for key, value in pairs(table) do
+        if not vim.list_contains(remove_keys, key) then
+            filtered_table[key] = value
+        end
+    end
+
+    return filtered_table
+end

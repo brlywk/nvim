@@ -9,6 +9,7 @@ require("tailwind-sorter").setup {
         "*.svelte",
         "*.tsx",
         "*.ts",
+        "*.vue",
     },
     node_path = "node",
 }
