@@ -66,8 +66,6 @@ conform.setup {
         markdown = web_formatter,
         yaml = { "yamlfix" },
         toml = { "taplo" },
-
-        ["*"] = { "codespell" },
     },
 }
 

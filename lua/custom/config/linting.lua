@@ -40,7 +40,15 @@ vim.api.nvim_create_autocmd({ "BufWritePost" }, {
             end
         end
 
+        -- try linting with assigned linter
         lint.try_lint()
+
+        -- always try to lint with codespell if installed... if not just install it
+        if require("mason-registry").is_installed "codespell" then
+            lint.try_lint "codespell"
+        else
+            vim.cmd "MasonInstall codespell"
+        end
 
         -- set keymap if a linter is found and ready
         vim.keymap.set("n", "<leader>cl", function()
