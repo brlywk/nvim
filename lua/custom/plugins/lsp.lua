@@ -7,7 +7,6 @@ return {
         "WhoIsSethDaniel/mason-tool-installer.nvim",
 
         -- Neodev and Neoconf
-        "folke/neodev.nvim",
         "folke/neoconf.nvim",
 
         -- Schemas

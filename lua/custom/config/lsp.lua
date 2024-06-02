@@ -1,8 +1,5 @@
 ----- setup -----
 
--- neodev just needs to be initialized
-require("neodev").setup {}
-
 -- neoconf needs to be run before any lsp server config
 local neoconf = require "neoconf"
 neoconf.setup {}
