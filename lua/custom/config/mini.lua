@@ -92,7 +92,7 @@ operators.make_mappings("replace", { textobject = "cr", line = "crr", selection 
 require("mini.splitjoin").setup()
 
 -- Super amazing surround mappings ----------------------------------
-require("mini.surround").setup()
+-- require("mini.surround").setup()
 
 -- Extended functionality for a/i ---------------------------------
 require("mini.ai").setup { n_lines = 500 }
