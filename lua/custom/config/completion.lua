@@ -86,11 +86,6 @@ cmp.setup({
 	},
 })
 
--- add border to hover (K)
-vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, {
-	border = "single",
-})
-
 -- command line
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
