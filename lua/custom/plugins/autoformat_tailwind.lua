@@ -21,5 +21,5 @@ return {
 			node_path = "node",
 		})
 	end,
-	enabled = true,
+	enabled = false,
 }
