@@ -40,6 +40,13 @@ M.server_settings = {
 			},
 		},
 	},
+	volar = {
+		init_options = {
+			vue = {
+				hybridMode = true,
+			},
+		},
+	},
 	yamlls = {
 		settings = {
 			schemaStore = {
@@ -49,7 +56,7 @@ M.server_settings = {
 			schemas = require("schemastore").yaml.schemas(),
 		},
 	},
-	typos_lsp = {},
+	-- typos_lsp = {},
 }
 
 -- generate list of servers mason should install
@@ -79,7 +86,6 @@ M.on_attach = function(client, bufnr)
 	-- lsp capabilities
 	opts.desc = "Code Actions"
 	set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
-	-- set("n", "<leader>ci", "<cmd>OrganizeImports<CR>", { desc = "Organize imports" })
 	opts.desc = "Format with server"
 	set("n", "<leader>cF", vim.lsp.buf.format, opts)
 	opts.desc = "Restart server"

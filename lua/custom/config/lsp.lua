@@ -25,10 +25,10 @@ require("mason").setup({
 	},
 })
 require("mason-tool-installer").setup({ ensure_installed = lsp_settings.ensure_installed })
+require("mason-lspconfig").setup({})
 
 -- config lsp servers
 local lspconfig = require("lspconfig")
-local mason_lspconfig = require("mason-lspconfig")
 
 -- add a border to these lsp elements that don't have one by default
 local lsp_add_borders = {
@@ -36,22 +36,27 @@ local lsp_add_borders = {
 	signatureHelp = "signature_help",
 }
 
-mason_lspconfig.setup_handlers({
-	function(server_name)
-		local server_config = vim.tbl_deep_extend(
-			"force",
-			{},
-			{ capabilities = capabilities, on_attach = lsp_settings.on_attach },
-			lsp_settings.server_settings[server_name] or {}
-		)
+-- TODO:
+-- 1. Replace tsserver with vtsls
+-- 2. Adjust lsp config so that every server config is split into "opts" (passed to lspconfig), and "extra" (name wip)
+-- that do additional config (e.g. for Vue / Volar that is deactivating tsserver and adding js, jsx, ts, tsx to
+-- file types)
 
-		lspconfig[server_name].setup(server_config)
+-- setup servers
+for server_name, server_opts in pairs(lsp_settings.server_settings) do
+	local server_config = vim.tbl_deep_extend(
+		"force",
+		{},
+		{ capabilities = capabilities, on_attach = lsp_settings.on_attach },
+		server_opts or {}
+	)
 
-		-- must be done after lsp is initialized
-		for name, funcName in pairs(lsp_add_borders) do
-			vim.lsp.handlers["textDocument/" .. name] = vim.lsp.with(vim.lsp.handlers[funcName], {
-				border = "single",
-			})
-		end
-	end,
-})
+	lspconfig[server_name].setup(server_config)
+
+	-- must be done after lsp is initialized
+	for name, funcName in pairs(lsp_add_borders) do
+		vim.lsp.handlers["textDocument/" .. name] = vim.lsp.with(vim.lsp.handlers[funcName], {
+			border = "single",
+		})
+	end
+end

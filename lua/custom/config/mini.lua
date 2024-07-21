@@ -11,7 +11,7 @@ set("n", "<leader>bX", function()
 	require("mini.bufremove").delete(0, true)
 end, { desc = "Force Delete Buffer" })
 
---  Keymapping Clues  ------------------------------------
+--  Keymap Clues  ------------------------------------
 local miniclue = require("mini.clue")
 miniclue.setup({
 	triggers = {
@@ -65,6 +65,7 @@ miniclue.setup({
 		{ mode = "n", keys = "<Leader>t", desc = "+Test" },
 		{ mode = "n", keys = "<Leader>w", desc = "+Window (Split)" },
 		{ mode = "n", keys = "<Leader>x", desc = "+Trouble" },
+		{ mode = "n", keys = "<Leader>z", desc = "+Spellcheck" },
 	},
 })
 
@@ -84,10 +85,9 @@ require("mini.move").setup()
 --		gx	Exchange text regions (gxx for single line)
 --		gm	Duplicate line (gmm single line)
 --		gs	Sort text (selection)
-local operators = require("mini.operators")
-operators.make_mappings("replace", { textobject = "cr", line = "crr", selection = "cr" })
+require("mini.operators").setup()
 
--- Splits / Joings (expands) argument lists ----------------------------------
+-- Splits / Joins (expands) argument lists ----------------------------------
 -- Keymap: gS
 require("mini.splitjoin").setup()
 

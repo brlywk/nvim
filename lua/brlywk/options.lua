@@ -41,7 +41,7 @@ opt.splitbelow = true
 
 -- save (almost) infinite undo history
 opt.undofile = true
-opt.undodir = os.getenv "HOME" .. "/.vim/undodir"
+opt.undodir = os.getenv("HOME") .. "/.vim/undodir"
 
 -- disable backups and swaps
 opt.swapfile = false
@@ -55,3 +55,15 @@ opt.fillchars = { eob = " " }
 
 -- decrease update time
 opt.updatetime = 250
+
+-- text wrapping for comments at 120 characters
+opt.textwidth = 120
+opt.formatoptions:append("c")
+opt.colorcolumn = "+1"
+
+-- Try nvim spellchecking
+vim.cmd("syntax on") -- enabled syntax highlighting
+opt.spell = true
+opt.spelllang = { "en_us" }
+opt.spelloptions:append("camel") -- better camelCase support
+opt.spellcapcheck = "" -- disable checking for capital letters at the start of sentences

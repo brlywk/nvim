@@ -3,3 +3,6 @@
 
 # Lazy.nvim package lock file
 lazy-lock.json
+ 
+# Spell checking list
+*.spl
