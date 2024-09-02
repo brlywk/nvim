@@ -1,63 +1,37 @@
 local M = {}
 
------ server settings -----
+local LSP_SERVERS_DIR = "lsp_servers"
+
+-- helper to get path relative to this file --
+local function get_file_path(directory, level)
+	level = level or 2
+
+	local path = require("plenary.path")
+	local source = debug.getinfo(level, "S").source
+	local dir = source:sub(1, 1) == "@" and source:sub(2) or source
+	dir = vim.fn.fnamemodify(dir, ":p:h")
+
+	return path:new(dir, directory):absolute()
+end
+
+-- helper to load server settings from single files in some directory --
+local function load_lsp_config(directory)
+	local scan = require("plenary.scandir")
+	local file_list = scan.scan_dir(directory, { search_pattern = "%.lua$" })
+	local server_settings = {}
+
+	for _, file in ipairs(file_list) do
+		local server_name = vim.fn.fnamemodify(file, ":t:r")
+		local config = dofile(file)
+
+		server_settings[server_name] = config
+	end
+
+	return server_settings
+end
 
 -- lspconfig: per server configuration
-M.server_settings = {
-	astro = {},
-	cssls = {
-		settings = {
-			css = {
-				validate = true,
-				lint = {
-					-- to not show @tailwind rules as warnings
-					unknownAtRules = "ignore",
-				},
-			},
-		},
-	},
-	emmet_ls = {},
-	gopls = {},
-	html = {},
-	jsonls = {
-		settings = {
-			json = {
-				schemas = require("schemastore").json.schemas(),
-				validate = { enable = true },
-			},
-		},
-	},
-	lua_ls = {},
-	rust_analyzer = {},
-	svelte = {},
-	tailwindcss = {},
-	taplo = {},
-	templ = {},
-	tsserver = {
-		init_options = {
-			preferences = {
-				disableSuggestions = true,
-			},
-		},
-	},
-	volar = {
-		init_options = {
-			vue = {
-				hybridMode = true,
-			},
-		},
-	},
-	yamlls = {
-		settings = {
-			schemaStore = {
-				enable = false,
-				url = "",
-			},
-			schemas = require("schemastore").yaml.schemas(),
-		},
-	},
-	-- typos_lsp = {},
-}
+M.server_settings = load_lsp_config(get_file_path(LSP_SERVERS_DIR, 2))
 
 -- generate list of servers mason should install
 M.ensure_installed = vim.tbl_keys(M.server_settings)

@@ -1,4 +1,4 @@
------ setup -----
+--- @diagnostic disable:undefined-global
 
 -- fidget
 require("fidget").setup({
@@ -60,3 +60,6 @@ for server_name, server_opts in pairs(lsp_settings.server_settings) do
 		})
 	end
 end
+
+-- make the LspInfo window look nicer
+require("lspconfig.ui.windows").default_options.border = "single"
