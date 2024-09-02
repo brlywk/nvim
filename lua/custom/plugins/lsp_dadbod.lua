@@ -1,4 +1,4 @@
--- curre
+-- currently causing problems with cmp
 return {
 	{ "tpope/vim-dadbod", enabled = false },
 	{ "kristijanhusak/vim-dadbod-completion", enabled = false },

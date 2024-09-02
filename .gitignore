@@ -6,3 +6,7 @@ lazy-lock.json
  
 # Spell checking list
 *.spl
+
+# other IDEs I might use to have settings open
+.zed
+.idea
