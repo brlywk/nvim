@@ -1,6 +1,6 @@
 return {
 	"S1M0N38/love2d.nvim",
-	enabled = true,
+	enabled = false,
 	cmd = "LoveRun",
 	opts = {
 		restart_on_save = false, -- feels a little bit clunky
