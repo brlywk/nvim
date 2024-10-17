@@ -1,9 +1,9 @@
 ----- setup -----
 
 -- define some sublists
-local gofmt = { "gofmt", "gofumpt" }
+local gofmt = { "gofmt", "gofumpt", stop_after_first = true }
 
-local prettier = { "prettierd", "prettier" }
+local prettier = { "prettierd", "prettier", stop_after_first = true }
 local prettier_cfg = {
 	require_cwd = true,
 	cwd = require("conform.util").root_file({
