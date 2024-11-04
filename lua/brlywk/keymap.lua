@@ -2,10 +2,10 @@ local set = vim.keymap.set
 
 -- little helper for all these keymaps
 local setOpts = function(desc, noremap, silent)
-	noremap = noremap == nil
-	silent = silent == nil
+    noremap = noremap == nil
+    silent = silent == nil
 
-	return { noremap = noremap, silent = silent, desc = desc }
+    return { noremap = noremap, silent = silent, desc = desc }
 end
 
 ----- General preferences -----
@@ -29,23 +29,23 @@ set("n", "N", "Nzzzv")
 
 -- for screen sharing: show cursorcolumn and cursorline
 set("n", "<leader><leader>=", function()
-	local visible = _G.brlywk_crosshair_enabled or false
-	vim.opt.cursorcolumn = not visible
-	vim.opt.cursorline = not visible
-	_G.brlywk_crosshair_enabled = not visible
+    local visible = _G.brlywk_crosshair_enabled or false
+    vim.opt.cursorcolumn = not visible
+    vim.opt.cursorline = not visible
+    _G.brlywk_crosshair_enabled = not visible
 end, setOpts("Show cursor crosshair"))
 
 set("n", "<leader><leader>-", function()
-	local visible = _G.brlywk_line_enabled or false
-	vim.opt.cursorline = not visible
-	_G.brlywk_line_enabled = not visible
+    local visible = _G.brlywk_line_enabled or false
+    vim.opt.cursorline = not visible
+    _G.brlywk_line_enabled = not visible
 end, setOpts("Show cursor line"))
 
 set("n", "<leader><leader>\\", function()
-	local visible = _G.brlywk_column_enabled or false
+    local visible = _G.brlywk_column_enabled or false
 
-	vim.opt.cursorcolumn = not visible
-	_G.brlywk_column_enabled = not visible
+    vim.opt.cursorcolumn = not visible
+    _G.brlywk_column_enabled = not visible
 end, setOpts("Show cursor column"))
 
 ----- Buffer management -----
@@ -88,43 +88,53 @@ set("n", "<leader><leader>x", "<cmd>.lua<CR>", { desc = "Execute the current (LU
 
 -- Try out new inlay hints
 set("n", "<leader>ch", function()
-	--- @diagnostic disable: missing-parameter
-	vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
+    --- @diagnostic disable: missing-parameter
+    vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, setOpts("Toggle inlay hints"))
 
 -- some changes for spellchecking
 set("n", "<leader>zs", function()
-	local word = vim.fn.expand("<cword>")
-	local suggestions = vim.fn.spellsuggest(word)
+    local word = vim.fn.expand("<cword>")
+    local suggestions = vim.fn.spellsuggest(word)
 
-	if #suggestions == 0 then
-		return
-	end
+    if #suggestions == 0 then
+        return
+    end
 
-	local items = {}
-	for i, suggestion in ipairs(suggestions) do
-		table.insert(items, string.format("%d. %s", i, suggestion))
-	end
+    local items = {}
+    for i, suggestion in ipairs(suggestions) do
+        table.insert(items, string.format("%d. %s", i, suggestion))
+    end
 
-	vim.ui.select(items, {
-		prompt = "Suggestion for: " .. word,
-		format_item = function(item)
-			return item
-		end,
-	}, function(choice)
-		if choice then
-			local selected = choice:match("%d+. (.+)")
-			local row, col = unpack(vim.api.nvim_win_get_cursor(0))
-			local line = vim.api.nvim_get_current_line()
-			local start_col = vim.fn.matchstrpos(line, "\\k*\\%" .. (col + 1) .. "c\\k*")[2]
-			local end_col = vim.fn.matchstrpos(line, "\\k*\\%" .. (col + 1) .. "c\\k*")[3]
-			local new_line = line:sub(1, start_col) .. selected .. line:sub(end_col + 1)
+    vim.ui.select(items, {
+        prompt = "Suggestion for: " .. word,
+        format_item = function(item)
+            return item
+        end,
+    }, function(choice)
+        if choice then
+            local selected = choice:match("%d+. (.+)")
+            local row, col = unpack(vim.api.nvim_win_get_cursor(0))
+            local line = vim.api.nvim_get_current_line()
+            local start_col = vim.fn.matchstrpos(line, "\\k*\\%" .. (col + 1) .. "c\\k*")[2]
+            local end_col = vim.fn.matchstrpos(line, "\\k*\\%" .. (col + 1) .. "c\\k*")[3]
+            local new_line = line:sub(1, start_col) .. selected .. line:sub(end_col + 1)
 
-			vim.api.nvim_set_current_line(new_line)
-			vim.api.nvim_win_set_cursor(0, { row, start_col + #selected - 1 })
-		end
-	end)
+            vim.api.nvim_set_current_line(new_line)
+            vim.api.nvim_win_set_cursor(0, { row, start_col + #selected - 1 })
+        end
+    end)
 end, setOpts("Suggestions for word"))
+
+-- toggle spellchecking
+set("n", "<leader>zz", function()
+    ---@diagnostic disable-next-line
+    if vim.opt.spell:get() then
+        vim.opt.spell = false
+    else
+        vim.opt.spell = true
+    end
+end, setOpts("Toggle spellchecking"))
 
 set("n", "<leader>zg", "zg", setOpts("Add to dictionary"))
 set("n", "<leader>zG", "zug", setOpts("Remove from dictionary"))

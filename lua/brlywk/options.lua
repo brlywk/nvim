@@ -63,7 +63,7 @@ opt.colorcolumn = "+1"
 
 -- Try nvim spellchecking
 vim.cmd("syntax on") -- enabled syntax highlighting
-opt.spell = true
+opt.spell = false
 opt.spelllang = { "en_us" }
 opt.spelloptions:append("camel") -- better camelCase support
-opt.spellcapcheck = "" -- disable checking for capital letters at the start of sentences
+opt.spellcapcheck = ""           -- disable checking for capital letters at the start of sentences
