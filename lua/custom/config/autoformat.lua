@@ -42,10 +42,20 @@ conform.setup({
 		-- only use prettier if a prettier config is found
 		prettier = prettier_cfg,
 		prettierd = prettier_cfg,
+		["sql-formatter"] = {
+			command = "sql-formatter",
+			args = {
+				"--config",
+				vim.json.encode({
+					language = "sql",
+					tabWidth = 4,
+				}),
+			},
+		},
 	},
 	formatters_by_ft = {
 		lua = { "stylua" },
-		go = { gofmt },
+		go = gofmt,
 		rust = { "rustfmt" },
 
 		html = web_formatter,
@@ -66,6 +76,7 @@ conform.setup({
 		markdown = web_formatter,
 		yaml = { "yamlfix" },
 		toml = { "taplo" },
+		sql = { "sql-formatter" },
 	},
 })
 
