@@ -1,7 +1,9 @@
 return {
-	init_options = {
-		preferences = {
-			disableSuggestions = true,
+	ts_ls = {
+		init_options = {
+			preferences = {
+				disableSuggestions = true,
+			},
 		},
 	},
 }
