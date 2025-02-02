@@ -30,8 +30,8 @@ local web_formatter = function(bufnr)
 		or conform.get_formatter_info("prettier", bufnr).available
 	then
 		return prettier
-	elseif conform.get_formatter_info("biome", bufnr).available then
-		return { "biome" }
+	-- elseif conform.get_formatter_info("biome", bufnr).available then
+	-- 	return { "biome" }
 	else
 		return {}
 	end
@@ -70,13 +70,17 @@ conform.setup({
 		astro = web_formatter,
 		svelte = web_formatter,
 		-- vue requires lsp fallback formatting
-		vue = {},
+		vue = { lsp_format = "first", stop_after_first = true },
 
 		json = web_formatter,
 		markdown = web_formatter,
 		yaml = { "yamlfix" },
 		toml = { "taplo" },
 		sql = { "sql-formatter" },
+
+		-- templ formatting should be handled by lsp as html formatter will otherwise
+		-- jump in and reformat everything incorrectly
+		templ = { lsp_format = "first", stop_after_first = true },
 	},
 })
 
