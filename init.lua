@@ -1,2 +1,1 @@
-require "brlywk"
-require "custom.lazy"
+require "config"

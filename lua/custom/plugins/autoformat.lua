@@ -1,8 +1,0 @@
-return {
-	"stevearc/conform.nvim",
-	event = { "BufReadPre", "BufNewFile" },
-	config = function()
-		require("custom.config.autoformat")
-	end,
-	enabled = true,
-}
