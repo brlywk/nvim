@@ -1,17 +1,17 @@
 return {
-	"neovim/nvim-lspconfig",
-	enabled = true,
-	dependencies = {
-		-- Mason
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"WhoIsSethDaniel/mason-tool-installer.nvim",
-		-- Schemas
-		"b0o/SchemaStore.nvim",
-		-- Fancy loading UI
-		"j-hui/fidget.nvim",
-	},
-	config = function()
+    "neovim/nvim-lspconfig",
+    enabled = true,
+    dependencies = {
+        -- Mason
+        "williamboman/mason.nvim",
+        "williamboman/mason-lspconfig.nvim",
+        "WhoIsSethDaniel/mason-tool-installer.nvim",
+        -- Schemas
+        "b0o/SchemaStore.nvim",
+        -- Fancy loading UI
+        "j-hui/fidget.nvim",
+    },
+    config = function()
         local border_type = "rounded"
 
         ---- LSP server settings ----
@@ -23,11 +23,11 @@ return {
             gopls = {},
 
             jsonls = {
-                settings = { 
+                settings = {
                     -- server_capabilities = {
                     --     documentFormattingProvider = false,
                     -- },
-                    json= {
+                    json = {
                         schemas = require("schemastore").json.schemas(),
                         validate = { enable = true },
                     },
@@ -64,27 +64,26 @@ return {
                     },
                     schemas = require("schemastore").yaml.schemas(),
                 },
-            }
+            },
         }
 
-
         ---- Fidget ----
-        require "fidget".setup {
+        require("fidget").setup {
             notification = {
-                window = { winblend = 0 }
-            }
+                window = { winblend = 0 },
+            },
         }
 
         ---- Completion ----
         local capabilities = nil
         if pcall(require, "cmp_nvim_lsp") then
-            capabilities = require "cmp_nvim_lsp".default_capabilities()
+            capabilities = require("cmp_nvim_lsp").default_capabilities()
         end
 
         ---- Mason config ----
-        require "mason".setup { ui = { border = border_type } }
-        require "mason-tool-installer".setup { ensure_installed = vim.tbl_keys(servers) }
-        require "mason-lspconfig".setup {}
+        require("mason").setup { ui = { border = border_type } }
+        require("mason-tool-installer").setup { ensure_installed = vim.tbl_keys(servers) }
+        require("mason-lspconfig").setup {}
 
         ---- LSP config ----
         local lspconfig = require "lspconfig"
@@ -92,12 +91,7 @@ return {
 
         -- set up LSP servers
         for server_name, server_opts in pairs(servers) do
-            local server_config = vim.tbl_deep_extend(
-            "force",
-            {},
-            { capabilities = capabilities },
-            server_opts or {}
-            )
+            local server_config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, server_opts or {})
 
             lspconfig[server_name].setup(server_config)
 
@@ -152,9 +146,9 @@ return {
                 set("n", "<leader>cr", vim.lsp.buf.rename, opts)
 
                 -- override server capabilities if specified in settings
-                if settings.server_capabilities then 
-                    for k,v in pairs(settings.server_capabilities) do
-                        if v == vim.NIL then 
+                if settings.server_capabilities then
+                    for k, v in pairs(settings.server_capabilities) do
+                        if v == vim.NIL then
                             v = nil
                         end
 
@@ -169,8 +163,8 @@ return {
                         navic.attach(client, bufnr)
                     end
                 end
-            end        
+            end,
         })
-        require "lspconfig.ui.windows".default_options.border = border_type
-	end,
+        require("lspconfig.ui.windows").default_options.border = border_type
+    end,
 }

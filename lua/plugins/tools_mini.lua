@@ -29,12 +29,15 @@ return {
 
         ---- Icons ----
         require("mini.icons").setup()
-
         --- Sessions ----
         require("mini.sessions").setup()
 
         ---- Enhanced operators ----
-        require("mini.operators").setup()
+        require("mini.operators").setup {
+            replace = {
+                prefix = nil,
+            },
+        }
 
         ---- Split / join argument lists ----
         require("mini.splitjoin").setup()

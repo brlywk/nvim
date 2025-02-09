@@ -12,15 +12,5 @@ return {
             changedelete = { text = "~" },
             untracked = { text = "┆" },
         },
-        on_attach = function(bufnr)
-            local gitsigns = require "gitsigns"
-
-            vim.keymap.set(
-                "n",
-                "<leader>gb",
-                gitsigns.toggle_current_line_blame,
-                { desc = "Toggle line blame", noremap = true, silent = true, buffer = bufnr }
-            )
-        end,
     },
 }

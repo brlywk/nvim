@@ -15,10 +15,17 @@ return {
     config = function()
         ----- Required bindings -----
         local ensure_installed = {
-            "lua",
             "go",
+            "gowork",
+            "gomod",
+            "gosum",
+            "gotmpl",
+            "templ",
+
+            "lua",
             "rust",
             "zig",
+            "sql",
 
             "html",
             "css",
@@ -39,6 +46,8 @@ return {
 
             "bash",
             "gitignore",
+            "comment",
+            "regex",
         }
 
         ----- Setup -----
@@ -148,12 +157,5 @@ return {
                 },
             },
         }
-
-        ----- Keymaps -----
-        local set = vim.keymap.set
-        -- enable repetition of treesitter move with ; and ,
-        local ts_repeat_move = require "nvim-treesitter.textobjects.repeatable_move"
-        set({ "n", "x", "o" }, ";", ts_repeat_move.repeat_last_move)
-        set({ "n", "x", "o" }, ",", ts_repeat_move.repeat_last_move_opposite)
     end,
 }

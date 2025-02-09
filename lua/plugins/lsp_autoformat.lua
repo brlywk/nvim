@@ -7,7 +7,7 @@ return {
         local prettier = { "prettier", lsp_format = "fallback", stop_after_first = true }
         local prettier_cfg = {
             require_cwd = true,
-            cwd = require("conform.util").root_file({
+            cwd = require("conform.util").root_file {
                 ".prettierrc",
                 ".prettierrc.json",
                 ".prettierrc.yml",
@@ -20,7 +20,7 @@ return {
                 "prettier.config.js",
                 "prettier.config.cjs",
                 "prettier.config.mjs",
-            }),
+            },
         }
 
         ---- Setup autoformatting ----
@@ -40,10 +40,10 @@ return {
                     command = "sql-formatter",
                     args = {
                         "--config",
-                        vim.json.encode({
+                        vim.json.encode {
                             language = "sql",
                             tabWidth = 4,
-                        }),
+                        },
                     },
                 },
             },

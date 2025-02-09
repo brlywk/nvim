@@ -17,14 +17,19 @@ return {
             { "<leader>c", group = "code" },
             { "<leader>b", group = "buffer" },
             { "<leader>f", group = "file/find" },
+            { "<leader>g", group = "git" },
+            { "<leader>l", group = "lsp" },
+            { "<leader>t", group = "test" },
+            { "<leader>v", group = "vim internal" },
             { "<leader>w", group = "window" },
+            { "<leader>x", group = "trouble" },
         },
     },
     keys = {
         {
-            "<leader>?",
+            "<leader><leader>?",
             function()
-                require("which-key").show({ global = false })
+                require("which-key").show { global = false }
             end,
             desc = "Buffer Local Keymaps (which-key)",
         },
