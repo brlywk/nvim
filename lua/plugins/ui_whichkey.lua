@@ -9,7 +9,7 @@ return {
             registers = false,
         },
         win = {
-            border = "rounded",
+            border = require("config.plugins").border_style,
         },
         spec = {
             -- add names for groups
@@ -18,7 +18,7 @@ return {
             { "<leader>b", group = "buffer" },
             { "<leader>f", group = "file/find" },
             { "<leader>g", group = "git" },
-            { "<leader>l", group = "lsp" },
+            -- Keep <leader>l free for "Language: <Language>" usage (see go.lua)
             { "<leader>t", group = "test" },
             { "<leader>v", group = "vim internal" },
             { "<leader>w", group = "window" },

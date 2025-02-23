@@ -7,25 +7,25 @@ local cmd = function(cmd_name)
 end
 
 -- add which-key category
-require("which-key").add { "<leader>lg", group = "Go" }
+require("which-key").add { "<leader>l", group = "Language: Go" }
 
 opts.desc = "Implement interface"
-set("n", "<leader>lgi", cmd "GoImpl", opts)
+set("n", "<leader>li", cmd "GoImpl", opts)
 opts.desc = "Struct: implemented interfaces"
-set("n", "<leader>lgI", cmd "GoImplements", opts)
+set("n", "<leader>lI", cmd "GoImplements", opts)
 
 opts.desc = "Add comment"
-set("n", "<leader>lgc", cmd "GoCmt", opts)
+set("n", "<leader>lc", cmd "GoCmt", opts)
 
 opts.desc = "Add struct tags"
-set("n", "<leader>lgt", cmd "GoAddTag", opts)
+set("n", "<leader>lt", cmd "GoAddTag", opts)
 opts.desc = "Remove struct tags"
-set("n", "<leader>lgT", cmd "GoRmTag", opts)
+set("n", "<leader>lT", cmd "GoRmTag", opts)
 
 opts.desc = "Fill struct fields"
-set("n", "<leader>lgs", cmd "GoFillStruct", opts)
+set("n", "<leader>ls", cmd "GoFillStruct", opts)
 opts.desc = "Fill switch statement"
-set("n", "<leader>lgS", cmd "GoFillSwitch", opts)
+set("n", "<leader>lS", cmd "GoFillSwitch", opts)
 
 opts.desc = "Add 'if err'"
-set("n", "<leader>lge", cmd "GoIfErr")
+set("n", "<leader>le", cmd "GoIfErr")

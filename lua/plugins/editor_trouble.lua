@@ -15,9 +15,9 @@ return {
             desc = "Buffer Diagnostics (Trouble)",
         },
         {
-            "<leader>cs",
-            "<cmd>Trouble symbols toggle focus=false<cr>",
-            desc = "Symbols (Trouble)",
+            "<leader>cT",
+            "<cmd>Trouble symbols toggle focus=true<cr>",
+            desc = "Symbol Tree",
         },
         {
             "<leader>cl",

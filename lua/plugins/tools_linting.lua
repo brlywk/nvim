@@ -20,7 +20,7 @@ return {
         }
 
         -- set keymap if a linter is found and ready
-        vim.keymap.set("n", "<leader>cl", function()
+        vim.keymap.set("n", "<leader>cL", function()
             lint.try_lint()
         end, { desc = "Lint file" })
     end,
