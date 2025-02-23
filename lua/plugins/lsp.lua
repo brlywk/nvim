@@ -165,6 +165,8 @@ return {
                 end
             end,
         })
+
+        -- correctly style the lsp ui windows
         require("lspconfig.ui.windows").default_options.border = border_type
     end,
 }

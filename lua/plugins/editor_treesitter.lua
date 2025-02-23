@@ -13,7 +13,7 @@ return {
     },
     build = ":TSUpdate",
     config = function()
-        ----- Required bindings -----
+        ---- Required bindings ----
         local ensure_installed = {
             "go",
             "gowork",
@@ -157,5 +157,14 @@ return {
                 },
             },
         }
+
+        ---- Extend ts-autotag to handle .templ as .html ----
+        require("nvim-ts-autotag").setup {}
+
+        local TagConfigs = require "nvim-ts-autotag.config.init"
+        TagConfigs:update(TagConfigs:get("html"):extend("templ", {
+            start_tag_pattern = { "element", "tag_start" },
+            end_tag_pattern = { "element", "tag_end" },
+        }))
     end,
 }
