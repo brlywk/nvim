@@ -12,7 +12,7 @@ return {
         "j-hui/fidget.nvim",
     },
     config = function()
-        local border_type = "rounded"
+        local border_type = require("config.plugins").border_style
 
         ---- LSP server settings ----
         local servers = {

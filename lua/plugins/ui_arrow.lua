@@ -12,7 +12,7 @@ return {
         },
         index_keys = "123456789zxcbnmZXVBNM,fghjklAFGHJKLwrstyuiopWRTYUIOP",
         window = {
-            border = "rounded",
+            border = require("config.plugins").border_style,
         },
     },
 }

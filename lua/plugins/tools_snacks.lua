@@ -78,7 +78,7 @@ return {
         styles = {
             ---@diagnostic disable-next-line:missing-fields
             lazygit_borders = {
-                border = "rounded",
+                border = require("config.plugins").border_style,
                 title = "LazyGit",
                 title_pos = "center",
             },
@@ -210,28 +210,28 @@ return {
             desc = "Goto t[y]pe definition",
         },
         {
-            "<leader>ls",
+            "<leader>cs",
             function()
                 Snacks.picker.lsp_symbols()
             end,
             desc = "LSP symbols",
         },
         {
-            "<leader>lS",
+            "<leader>cS",
             function()
                 Snacks.picker.lsp_workspace_symbols()
             end,
             desc = "LSP workspace symbols",
         },
         {
-            "<leader>ld",
+            "<leader>cd",
             function()
                 Snacks.picker.diagnostics_buffer()
             end,
             desc = "Diagnostics (buffer)",
         },
         {
-            "<leader>lD",
+            "<leader>cD",
             function()
                 Snacks.picker.diagnostics()
             end,

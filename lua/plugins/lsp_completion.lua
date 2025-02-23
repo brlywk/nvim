@@ -18,6 +18,8 @@ return {
         "saadparwaiz1/cmp_luasnip",
     },
     config = function()
+        local border_type = require("config.plugins").border_style
+
         ---- nvim-wide lsp setup ----
         local completion_opts = { "menuone", "noselect", "noinsert", "preview" }
         vim.opt.completeopt = completion_opts
@@ -85,11 +87,11 @@ return {
             -- window styling
             window = {
                 completion = {
-                    border = "rounded",
+                    border = border_type,
                     winhighlight = "Normal:CmpPmenu,CursorLine:CmpSel,Search:PmenuSel",
                 },
                 documentation = {
-                    border = "rounded",
+                    border = border_type,
                     winhighlight = "Normal:CmpDoc",
                 },
             },
