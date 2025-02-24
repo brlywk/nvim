@@ -10,6 +10,10 @@ return {
             event = "VeryLazy",
             enabled = vim.fn.has "nvim-0.10.0" == 1,
         },
+        {
+            "bezhermoso/tree-sitter-ghostty",
+            build = "make nvim_install",
+        },
     },
     build = ":TSUpdate",
     config = function()

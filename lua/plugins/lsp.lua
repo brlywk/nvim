@@ -20,6 +20,8 @@ return {
 
             emmet_ls = {},
 
+            html = {},
+
             gopls = {},
 
             jsonls = {
