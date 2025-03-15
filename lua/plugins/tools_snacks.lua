@@ -65,7 +65,10 @@ return {
             end,
         },
 
-        picker = { enabled = true },
+        picker = {
+            enabled = true,
+            exclude = { "node_modules" },
+        },
 
         quickfile = { enabled = true },
 
