@@ -98,14 +98,25 @@ return {
             lspconfig[server_name].setup(server_config)
 
             -- styling overwrites
-            for name, funcName in pairs(lsp_add_border) do
-                vim.lsp.handlers["textDocument/" .. name] = vim.lsp.with(vim.lsp.handlers[funcName], {
-                    border = border_type,
-                })
-            end
+            -- for name, funcName in pairs(lsp_add_border) do
+            --     vim.lsp.handlers["textDocument/" .. name] = vim.lsp.with(vim.lsp.handlers[funcName], {
+            --         border = border_type,
+            --     })
+            -- end
         end
 
         ---- LSP customization ----
+
+        -- override all floating style windows to use the same border (includes
+        -- LSP "hover")
+        local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+        ---@diagnostic disable-next-line: duplicate-set-field
+        function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
+            opts = opts or {}
+            opts.border = border_type
+            return orig_util_open_floating_preview(contents, syntax, opts, ...)
+        end
+
         vim.api.nvim_create_autocmd("LspAttach", {
             callback = function(args)
                 local bufnr = args.buf
@@ -125,7 +136,7 @@ return {
                 vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
                 -- The Most Important Keymap Ever
-                set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
+                -- set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
 
                 -- global keymaps
                 opts.desc = "Go to definition"
