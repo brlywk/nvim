@@ -27,7 +27,16 @@ return {
             jsonls = {
                 settings = {
                     json = {
-                        schemas = require("schemastore").json.schemas(),
+                        schemas = require("schemastore").json.schemas {
+                            extra = {
+                                {
+                                    description = "BMW WCP Manifest",
+                                    fileMatch = { "manifest.json" },
+                                    name = "manifest.json",
+                                    url = "https://wepf.bmwgroup.net/json-schemas/wcp/cdk/stable/WcpManifestType.schema.json",
+                                },
+                            },
+                        },
                         validate = { enable = true },
                     },
                 },
@@ -74,7 +83,16 @@ return {
                         enable = false,
                         url = "",
                     },
-                    schemas = require("schemastore").yaml.schemas(),
+                    schemas = require("schemastore").yaml.schemas {
+                        extra = {
+                            {
+                                description = "BMW WCP Deployment Schema",
+                                fileMatch = { "deployment*.yaml" },
+                                name = "deployment.yaml",
+                                url = "https://wepf.bmwgroup.net/json-schemas/wcp/cdk/stable/DeploymentSchema.schema.json",
+                            },
+                        },
+                    },
                 },
             },
 
