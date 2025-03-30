@@ -1,5 +1,6 @@
 ---- Helper ----
 local set = vim.keymap.set
+local unset = vim.keymap.del
 local setOpts = function(desc, expr, noremap, silent)
     noremap = noremap == nil
     silent = silent == nil

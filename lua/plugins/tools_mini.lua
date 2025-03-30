@@ -35,7 +35,7 @@ return {
         ---- Enhanced operators ----
         require("mini.operators").setup {
             replace = {
-                prefix = nil,
+                prefix = "",
             },
         }
 

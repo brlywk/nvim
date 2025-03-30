@@ -26,9 +26,6 @@ return {
 
             jsonls = {
                 settings = {
-                    -- server_capabilities = {
-                    --     documentFormattingProvider = false,
-                    -- },
                     json = {
                         schemas = require("schemastore").json.schemas(),
                         validate = { enable = true },
@@ -85,24 +82,15 @@ return {
         ---- Mason config ----
         require("mason").setup { ui = { border = border_type } }
         require("mason-tool-installer").setup { ensure_installed = vim.tbl_keys(servers) }
-        require("mason-lspconfig").setup {}
 
         ---- LSP config ----
         local lspconfig = require "lspconfig"
-        local lsp_add_border = { hover = "hover", signatureHelp = "signature_help" }
 
         -- set up LSP servers
         for server_name, server_opts in pairs(servers) do
             local server_config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, server_opts or {})
 
             lspconfig[server_name].setup(server_config)
-
-            -- styling overwrites
-            -- for name, funcName in pairs(lsp_add_border) do
-            --     vim.lsp.handlers["textDocument/" .. name] = vim.lsp.with(vim.lsp.handlers[funcName], {
-            --         border = border_type,
-            --     })
-            -- end
         end
 
         ---- LSP customization ----
@@ -110,6 +98,7 @@ return {
         -- override all floating style windows to use the same border (includes
         -- LSP "hover")
         local orig_util_open_floating_preview = vim.lsp.util.open_floating_preview
+
         ---@diagnostic disable-next-line: duplicate-set-field
         function vim.lsp.util.open_floating_preview(contents, syntax, opts, ...)
             opts = opts or {}
@@ -128,6 +117,21 @@ return {
                     settings = {}
                 end
 
+                -- adjust diagnostic infos...
+                vim.diagnostic.config {
+                    virtual_text = true,
+                    signs = {
+                        priority = 20,
+                        text = {
+                            [vim.diagnostic.severity.ERROR] = "",
+                            [vim.diagnostic.severity.WARN] = "",
+                            [vim.diagnostic.severity.INFO] = "",
+                            [vim.diagnostic.severity.HINT] = "",
+                        },
+                    },
+                    severity_sort = true,
+                }
+
                 -- helper
                 local set = vim.keymap.set
                 local opts = { noremap = true, silent = true, buffer = bufnr }
@@ -135,21 +139,8 @@ return {
                 -- set omnifunction
                 vim.opt_local.omnifunc = "v:lua.vim.lsp.omnifunc"
 
-                -- The Most Important Keymap Ever
-                -- set("i", "<C-s>", vim.lsp.buf.signature_help, opts)
-
-                -- global keymaps
-                opts.desc = "Go to definition"
-                set("n", "gd", vim.lsp.buf.definition, opts)
-                opts.desc = "Show declarations"
-                set("n", "gD", vim.lsp.buf.declaration, opts)
-                opts.desc = "Show references"
-                set("n", "gr", vim.lsp.buf.references, opts)
-                opts.desc = "Go to type definition"
-                set("n", "gt", vim.lsp.buf.type_definition, opts)
-
                 -- lsp capabilities
-                opts.desc = "Code Actions"
+                opts.desc = "Code actions"
                 set("n", "<leader>ca", vim.lsp.buf.code_action, opts)
                 opts.desc = "Format with server"
                 set("n", "<leader>cF", vim.lsp.buf.format, opts)
@@ -157,6 +148,14 @@ return {
                 set("n", "<leader>cR", "<cmd>LspRestart<CR>", opts)
                 opts.desc = "Rename symbol"
                 set("n", "<leader>cr", vim.lsp.buf.rename, opts)
+                opts.desc = "Virtual line diagnostics"
+                set("n", "<leader>cv", function()
+                    local vline_visible = vim.diagnostic.config(nil).virtual_lines or false
+                    vim.diagnostic.config {
+                        virtual_lines = not vline_visible,
+                        virtual_text = vline_visible
+                    }
+                end, opts)
 
                 -- override server capabilities if specified in settings
                 if settings.server_capabilities then
