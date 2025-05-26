@@ -46,6 +46,12 @@ return {
                         },
                     },
                 },
+
+                odinfmt = {
+                    command = vim.fn.expand "$HOME/.odin_lsp/odinfmt",
+                    args = { "-stdin" },
+                    stdin = true,
+                },
             },
 
             -- which settings to use for autoformatting
@@ -77,6 +83,8 @@ return {
                 -- templ formatting should be handled by lsp as html formatter will otherwise
                 -- jump in and reformat everything incorrectly
                 templ = { lsp_format = "prefer", stop_after_first = true },
+
+                odin = { "odinfmt", lsp_format = "fallback" },
             },
 
             -- autoformat on save settings

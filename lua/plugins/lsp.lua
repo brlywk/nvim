@@ -35,6 +35,8 @@ return {
 
             lua_ls = {},
 
+            ols = {},
+
             rust_analyzer = {},
 
             svelte = {},
@@ -153,7 +155,7 @@ return {
                     local vline_visible = vim.diagnostic.config(nil).virtual_lines or false
                     vim.diagnostic.config {
                         virtual_lines = not vline_visible,
-                        virtual_text = vline_visible
+                        virtual_text = vline_visible,
                     }
                 end, opts)
 
