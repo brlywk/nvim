@@ -2,7 +2,7 @@
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",
-    enabled = true,
+    enabled = not vim.g.vscode,
     dependencies = {
         -- pictograms
         "onsails/lspkind.nvim",

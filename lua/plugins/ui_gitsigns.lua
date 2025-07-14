@@ -1,6 +1,6 @@
 return {
     "lewis6991/gitsigns.nvim",
-    enabled = true,
+    enabled = not vim.g.vscode,
     opts = {
         sign_priority = 15,
         signs = {

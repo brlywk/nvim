@@ -1,7 +1,7 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    enabled = true,
+    enabled = not vim.g.vscode,
     config = function()
         require("oil").setup {
             default_file_explorer = true,
