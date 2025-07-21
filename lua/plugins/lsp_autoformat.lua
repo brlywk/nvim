@@ -33,6 +33,8 @@ return {
         }
 
         conform.setup {
+            notify_on_error = false,
+
             -- overwrite settings for some formatters
             formatters = {
                 prettier = prettier_cfg,

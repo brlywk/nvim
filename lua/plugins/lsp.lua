@@ -38,7 +38,6 @@ return {
             ols = {
                 cmd = { vim.fn.expand "$HOME/.odin_lsp/ols" },
                 init_options = {
-                    checker_args = "-vet -vet-cast -strict-style",
                     collections = {
                         { name = "shared", path = vim.fn.expand "$HOME/.odin" },
                     },
