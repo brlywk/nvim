@@ -43,6 +43,10 @@ set("n", "<leader>wh", "<C-w>s", setOpts "Split horizontally")
 set("n", "<leader>wx", "<cmd>close<CR>", setOpts "Close window")
 set("n", "<leader>wo", "<C-w>o", setOpts "Close all other windows")
 
+-- terminal stuff
+set("n", "<leader><leader>t", "<cmd>terminal<CR>", setOpts "Terminal")
+set("t", "<Esc><Esc>", "<C-\\><C-n>", setOpts "Exit terminal mode")
+
 ---- Useful for config changes and plugin development ----
 set("n", "<leader><leader>r", "<cmd>source %<CR>", setOpts "Reload current file")
 set("n", "<leader><leader>x", "<cmd>.lua<CR>", setOpts "Execute the current (LUA) line")

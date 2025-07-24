@@ -122,11 +122,11 @@ return {
             desc = "Insert symbol",
         },
         {
-            "<leader><leader>t",
+            "<leader><leader>T",
             function()
                 Snacks.terminal()
             end,
-            desc = "Terminal",
+            desc = "Terminal split",
         },
 
         -- buffers
