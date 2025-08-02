@@ -94,14 +94,14 @@ return {
     keys = {
         ---- Pickers ----
         {
-            "<leader>/",
+            "<leader>?",
             function()
                 Snacks.picker.smart()
             end,
             desc = "Smart find",
         },
         {
-            "<leader>?",
+            "<leader>/",
             function()
                 Snacks.picker.grep()
             end,
