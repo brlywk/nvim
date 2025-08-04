@@ -5,5 +5,6 @@ local M = {}
 -- border_style is the default border style to use for any kind of "stylable
 -- window"
 M.border_style = "rounded"
+M.theme_flavour = "mocha"
 
 return M
