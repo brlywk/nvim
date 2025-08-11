@@ -61,7 +61,7 @@ return {
                 lua = { "stylua" },
                 go = { "gofmt" },
                 rust = { "rustfmt" },
-                zig = { lsp_format = "prefer" },
+                odin = { "odinfmt", lsp_format = "fallback" },
 
                 html = prettier,
                 css = prettier,
@@ -85,8 +85,6 @@ return {
                 -- templ formatting should be handled by lsp as html formatter will otherwise
                 -- jump in and reformat everything incorrectly
                 templ = { lsp_format = "prefer", stop_after_first = true },
-
-                odin = { "odinfmt", lsp_format = "fallback" },
             },
 
             -- autoformat on save settings
