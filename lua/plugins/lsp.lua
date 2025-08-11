@@ -27,16 +27,7 @@ return {
             jsonls = {
                 settings = {
                     json = {
-                        schemas = require("schemastore").json.schemas {
-                            extra = {
-                                {
-                                    description = "BMW WCP Manifest",
-                                    fileMatch = { "manifest.json" },
-                                    name = "manifest.json",
-                                    url = "https://wepf.bmwgroup.net/json-schemas/wcp/cdk/stable/WcpManifestType.schema.json",
-                                },
-                            },
-                        },
+                        schemas = require("schemastore").json.schemas(),
                         validate = { enable = true },
                     },
                 },
@@ -83,16 +74,7 @@ return {
                         enable = false,
                         url = "",
                     },
-                    schemas = require("schemastore").yaml.schemas {
-                        extra = {
-                            {
-                                description = "BMW WCP Deployment Schema",
-                                fileMatch = { "deployment*.yaml" },
-                                name = "deployment.yaml",
-                                url = "https://wepf.bmwgroup.net/json-schemas/wcp/cdk/stable/DeploymentSchema.schema.json",
-                            },
-                        },
-                    },
+                    schemas = require("schemastore").yaml.schemas(),
                 },
             },
 
@@ -189,6 +171,7 @@ return {
                     local vline_visible = vim.diagnostic.config(nil).virtual_lines or false
                     vim.diagnostic.config {
                         virtual_lines = not vline_visible,
+                        ---@diagnostic disable-next-line
                         virtual_text = vline_visible,
                     }
                 end, opts)
