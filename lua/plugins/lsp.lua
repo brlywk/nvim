@@ -45,6 +45,9 @@ return {
                 },
             },
 
+            -- Python
+            ruff = {},
+
             rust_analyzer = {},
 
             svelte = {},
