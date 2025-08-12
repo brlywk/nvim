@@ -62,6 +62,7 @@ return {
                 go = { "gofmt" },
                 rust = { "rustfmt" },
                 odin = { "odinfmt", lsp_format = "fallback" },
+                zig = { lsp_format = "prefer" },
 
                 html = prettier,
                 css = prettier,

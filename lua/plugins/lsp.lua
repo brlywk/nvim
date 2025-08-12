@@ -77,6 +77,11 @@ return {
                     schemas = require("schemastore").yaml.schemas(),
                 },
             },
+
+            zls = {
+                enable_build_on_save = true,
+                semantic_tokes = "partial",
+            },
         }
 
         ---- Fidget ----
