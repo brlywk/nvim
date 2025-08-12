@@ -54,6 +54,12 @@ return {
                     args = { "-stdin" },
                     stdin = true,
                 },
+
+                zigfmt = {
+                    command = "zig",
+                    args = { "fmt", "--stdin" },
+                    stdin = true,
+                },
             },
 
             -- which settings to use for autoformatting
@@ -62,6 +68,7 @@ return {
                 go = { "gofmt" },
                 rust = { "rustfmt" },
                 odin = { "odinfmt", lsp_format = "fallback" },
+                zig = { "zigfmt", lsp_format = "never" },
 
                 html = prettier,
                 css = prettier,
