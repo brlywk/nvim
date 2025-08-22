@@ -54,6 +54,12 @@ return {
                     args = { "-stdin" },
                     stdin = true,
                 },
+
+                zigfmt = {
+                    command = "zig",
+                    args = { "fmt", "--stdin" },
+                    stdin = true,
+                },
             },
 
             -- which settings to use for autoformatting

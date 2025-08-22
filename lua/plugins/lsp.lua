@@ -171,6 +171,7 @@ return {
                     local vline_visible = vim.diagnostic.config(nil).virtual_lines or false
                     vim.diagnostic.config {
                         virtual_lines = not vline_visible,
+                        ---@diagnostic disable-next-line
                         virtual_text = vline_visible,
                     }
                 end, opts)

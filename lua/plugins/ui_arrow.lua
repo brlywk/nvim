@@ -3,6 +3,7 @@ return {
     dependencies = {
         { "echasnovski/mini.icons" },
     },
+    enabled = not vim.g.vscode,
     opts = {
         show_icons = true,
         leader_key = "m",

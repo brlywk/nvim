@@ -1,7 +1,7 @@
 return {
     "stevearc/oil.nvim",
     dependencies = { "nvim-tree/nvim-web-devicons" },
-    enabled = true,
+    enabled = not vim.g.vscode,
     config = function()
         require("oil").setup {
             default_file_explorer = true,
@@ -27,7 +27,7 @@ return {
                 is_hidden_file = function(name, _)
                     local startsWithDot = vim.startswith(name, ".")
                     local nodeModules = vim.startswith(name, "node_modules")
-                    local rustBuilds = vim.startswith(name, "target")
+                    local rustBuilds = name == "target"
 
                     return startsWithDot or nodeModules or rustBuilds
                 end,

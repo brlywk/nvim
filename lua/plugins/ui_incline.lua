@@ -1,6 +1,6 @@
 return {
     "b0o/incline.nvim",
-    enabled = true,
+    enabled = not vim.g.vscode,
     event = "VeryLazy",
     dependencies = {
         "neovim/nvim-lspconfig",

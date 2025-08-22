@@ -3,7 +3,7 @@ return {
     "folke/snacks.nvim",
     priority = 1000,
     lazy = false,
-
+    enabled = not vim.g.vscode,
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
