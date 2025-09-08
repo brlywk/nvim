@@ -12,77 +12,12 @@ return {
         "j-hui/fidget.nvim",
     },
     config = function()
+        local config_lsp = require "plugins.lsp.servers"
+        local servers = config_lsp.servers
         local border_type = require("config.plugins").border_style
 
-        ---- LSP server settings ----
-        local servers = {
-            astro = {},
-
-            emmet_ls = {},
-
-            html = {},
-
-            gopls = {},
-
-            jsonls = {
-                settings = {
-                    json = {
-                        schemas = require("schemastore").json.schemas(),
-                        validate = { enable = true },
-                    },
-                },
-            },
-
-            lua_ls = {},
-
-            ols = {
-                cmd = { vim.fn.expand "$HOME/.odin_lsp/ols" },
-                init_options = {
-                    collections = {
-                        { name = "shared", path = vim.fn.expand "$HOME/.odin" },
-                    },
-                    odin_command = vim.fn.expand "$HOME/.odin/odin",
-                },
-            },
-
-            -- Python
-            ruff = {},
-
-            rust_analyzer = {},
-
-            svelte = {},
-
-            tailwindcss = {},
-
-            taplo = {},
-
-            templ = {},
-
-            ts_ls = {
-                root_dir = require("lspconfig").util.root_pattern "package.json",
-                single_file = false,
-                init_options = {
-                    preferences = {
-                        disableSuggestions = true,
-                    },
-                },
-            },
-
-            yamlls = {
-                settings = {
-                    schemaStore = {
-                        enable = false,
-                        url = "",
-                    },
-                    schemas = require("schemastore").yaml.schemas(),
-                },
-            },
-
-            zls = {
-                enable_build_on_save = true,
-                semantic_tokes = "partial",
-            },
-        }
+        ---- LSP config ----
+        local lspconfig = require "lspconfig"
 
         ---- Fidget ----
         require("fidget").setup {
@@ -99,14 +34,16 @@ return {
 
         ---- Mason config ----
         require("mason").setup { ui = { border = border_type } }
-        require("mason-tool-installer").setup { ensure_installed = vim.tbl_keys(servers) }
-
-        ---- LSP config ----
-        local lspconfig = require "lspconfig"
+        require("mason-tool-installer").setup { ensure_installed = config_lsp:ensure_installed() }
 
         -- set up LSP servers
         for server_name, server_opts in pairs(servers) do
-            local server_config = vim.tbl_deep_extend("force", {}, { capabilities = capabilities }, server_opts or {})
+            local server_config = vim.tbl_deep_extend(
+                "force",
+                {},
+                { capabilities = capabilities },
+                server_opts.config or {}
+            )
 
             lspconfig[server_name].setup(server_config)
         end
@@ -130,7 +67,7 @@ return {
                 local client = assert(vim.lsp.get_client_by_id(args.data.client_id), "must have client id")
 
                 -- get server specific settings
-                local settings = servers[client.name]
+                local settings = servers[client.name].config
                 if type(settings) ~= "table" then
                     settings = {}
                 end

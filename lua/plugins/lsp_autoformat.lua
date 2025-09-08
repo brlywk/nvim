@@ -26,7 +26,7 @@ return {
         ---- Setup autoformatting ----
         local conform = require "conform"
         local on_save_settings = {
-            timeout_ms = 500,
+            timeout_ms = 1000,
             lsp_fallback = true,
             quiet = true,
             async = false,
@@ -37,6 +37,24 @@ return {
 
             -- overwrite settings for some formatters
             formatters = {
+                clangd_tidy = {
+                    command = "clang-tidy",
+                    args = {
+                        "--fix",
+                        "--fix-errors",
+                        "--format-style=file",
+                        "--header-filter=.*",
+                        "$FILENAME",
+                    },
+                    stdin = false,
+                    exit_codes = { 0, 1 },
+                    cwd = require("conform.util").root_file {
+                        "compile_commands.json",
+                        ".clang-tidy",
+                        "CMakeLists.txt",
+                    },
+                },
+
                 prettier = prettier_cfg,
                 ["sql-formatter"] = {
                     command = "sql-formatter",
@@ -64,11 +82,13 @@ return {
 
             -- which settings to use for autoformatting
             formatters_by_ft = {
-                lua = { "stylua" },
                 go = { "gofmt" },
-                rust = { "rustfmt" },
+                lua = { "stylua" },
                 odin = { "odinfmt", lsp_format = "fallback" },
+                rust = { "rustfmt" },
                 zig = { lsp_format = "prefer" },
+
+                gdscript = { "gdformat" },
 
                 html = prettier,
                 css = prettier,
@@ -101,6 +121,14 @@ return {
                     -- To organize the imports.
                     "ruff_organize_imports",
                 },
+
+                -- all the C family stuff
+                c = { "clang-format" },
+                cc = { "clang-format" },
+                cpp = { "clang-format" },
+                h = { "clang-format" },
+                hh = { "clang-format" },
+                hpp = { "clang-format" },
             },
 
             -- autoformat on save settings

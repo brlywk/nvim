@@ -13,10 +13,19 @@ return {
             go = { "golangcilint" },
             lua = { "luacheck" },
 
+            gdscript = { "gdlint" },
+
             javascript = { eslint },
             javascriptreact = { eslint },
             typescript = { eslint },
             typescriptreact = { eslint },
+
+            c = { "clangtidy" },
+            cc = { "clangtidy" },
+            cpp = { "clangtidy" },
+            h = { "clangtidy" },
+            hh = { "clangtidy" },
+            hpp = { "clangtidy" },
         }
 
         -- set keymap if a linter is found and ready
