@@ -16,9 +16,6 @@ return {
         local servers = config_lsp.servers
         local border_type = require("config.plugins").border_style
 
-        ---- LSP config ----
-        local lspconfig = require "lspconfig"
-
         ---- Fidget ----
         require("fidget").setup {
             notification = {
@@ -45,7 +42,8 @@ return {
                 server_opts.config or {}
             )
 
-            lspconfig[server_name].setup(server_config)
+            vim.lsp.enable(server_name)
+            vim.lsp.config[server_name] = server_config
         end
 
         ---- LSP customization ----
