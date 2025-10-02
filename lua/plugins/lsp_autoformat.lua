@@ -55,7 +55,18 @@ return {
                     },
                 },
 
+                odinfmt = {
+                    command = vim.fn.expand "$HOME/.odin_lsp/odinfmt",
+                    args = { "-stdin" },
+                    stdin = true,
+                },
+
                 prettier = prettier_cfg,
+
+                -- rustfmt = {
+                --     args = { "--edition", "2024" },
+                -- },
+
                 ["sql-formatter"] = {
                     command = "sql-formatter",
                     args = {
@@ -65,12 +76,6 @@ return {
                             tabWidth = 4,
                         },
                     },
-                },
-
-                odinfmt = {
-                    command = vim.fn.expand "$HOME/.odin_lsp/odinfmt",
-                    args = { "-stdin" },
-                    stdin = true,
                 },
 
                 zigfmt = {
