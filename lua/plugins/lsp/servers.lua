@@ -172,10 +172,14 @@ M.servers = {
     ts_ls = {
         ensure_installed = true,
         config = {
-            root_dir = require("lspconfig").util.root_pattern "package.json",
-            single_file = false,
+            root_dir = function(bufnr, on_dir)
+                on_dir(vim.fs.root(bufnr, { "package.json", "tsconfig.json", "jsconfig.json", ".git" }))
+            end,
+            workspace_required = true,
             init_options = {
                 preferences = {
+                    -- disable ts_ls's own suggestions when linting via eslint
+                    -- is enabled
                     disableSuggestions = true,
                 },
             },
@@ -185,7 +189,6 @@ M.servers = {
     yamlls = {
         ensure_installed = true,
         config = {
-
             settings = {
                 schemaStore = {
                     enable = false,
