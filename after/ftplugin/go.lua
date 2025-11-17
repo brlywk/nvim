@@ -1,10 +1,7 @@
 -- extra keys for Go.nvim
 local set = vim.keymap.set
 local opts = { silent = true, noremap = true }
-
-local cmd = function(cmd_name)
-    return ":" .. cmd_name .. "<CR>"
-end
+local cmd = require("config.helper").cmd
 
 -- add which-key category
 require("which-key").add { "<leader>l", group = "Language: Go" }

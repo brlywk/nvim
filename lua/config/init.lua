@@ -6,8 +6,8 @@ vim.g.maplocalleader = " "
 -- load general settings
 require "config.options"
 
--- load helper functions
-require "config.helper"
+-- load global helper functions
+require "config.global_helper"
 
 -- load keymaps
 require "config.keymap"

@@ -1,35 +1,18 @@
--- print contents of lua table
-P = function(t)
-    print(vim.inspect(t))
-    return t
+local M = {}
+
+---Format the cmd_name given as a command that can be run (e.g. in Keymaps)
+---@param cmd_name string Name of the command
+---@return string
+M.cmd = function(cmd_name)
+    return ":" .. cmd_name .. "<CR>"
 end
 
--- use plenary to reload a module
-RELOAD = function(...)
-    local plenary, installed = pcall(function()
-        require "plenary.reload"
-    end)
-
-    if installed then
-        --- @diagnostic disable: undefined-field
-        return plenary.reload_module(...)
-    end
-end
-
--- reload and re-parse a plugin
-R = function(name)
-    RELOAD(name)
-    return require(name)
-end
-
--- check if cwd is git controlled
-CHECK_GIT = function()
-    local git_dir = vim.fn.finddir(".git", ".;")
-    return git_dir ~= ""
-end
-
--- vim.tbl_filter() does not really do what I need for some things
-FILTER_OUT_KEYS = function(table, ...)
+---Filter out all keys provided from the table.
+---`vim.tbl_filter()` does not really do what I need for some things
+---@param table any Really... ANY table
+---@param ... string A list of table keys that should be filtered out
+---@return table
+M.filter_keys = function(table, ...)
     local remove_keys = { ... }
     local filtered_table = {}
 
@@ -41,3 +24,12 @@ FILTER_OUT_KEYS = function(table, ...)
 
     return filtered_table
 end
+
+---Check if the current directory is git controlled.
+---@return boolean
+M.check_git = function()
+    local git_dir = vim.fn.finddir(".git", ".;")
+    return git_dir ~= ""
+end
+
+return M

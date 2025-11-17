@@ -1,11 +1,16 @@
--- organize imports on save
-vim.api.nvim_create_autocmd("BufWritePre", {
-    pattern = { "*.zig", "*.zon" },
-    callback = function(ev)
-        vim.lsp.buf.code_action {
-            ---@diagnostic disable-next-line
-            context = { only = { "source.organizeImports" } },
-            apply = true,
-        }
-    end,
-})
+local set = vim.keymap.set
+local opts = { silent = true, noremap = true }
+local cmd = require("config.helper").cmd
+
+require("which-key").add { "<leader>l", group = "Language: Zig" }
+
+-- organize imports on save; doing this on PreBufWrite seems to cause some weird
+-- issues that tend to mess up the undo history
+opts.desc = "Sort imports"
+set("n", "<leader>li", function()
+    vim.lsp.buf.code_action {
+        ---@diagnostic disable-next-line
+        context = { only = { "source.organizeImports" } },
+        apply = true,
+    }
+end, opts)
