@@ -1,3 +1,4 @@
+-- organize imports on save
 vim.api.nvim_create_autocmd("BufWritePre", {
     pattern = { "*.zig", "*.zon" },
     callback = function(ev)

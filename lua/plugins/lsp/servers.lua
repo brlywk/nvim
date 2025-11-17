@@ -198,6 +198,28 @@ M.servers = {
             },
         },
     },
+
+    zls = {
+        ensure_installed = true,
+        config = {
+            -- Schema: https://github.com/zigtools/zls/blob/master/schema.json
+            settings = {
+                semantic_tokens = "partial",
+                -- deactivate all the inlay hints activated by default
+                inlay_hints_show_variable_type_hints = false,
+                inlay_hints_show_struct_literal_field_type = false,
+                inlay_hints_show_parameter_name = false,
+                inlay_hints_show_builtin = false,
+                inlay_hints_exclude_single_argument = false,
+                -- while learning, keeping styleguide warnings on is probably a
+                -- good idea, right? ;)
+                warn_style = true,
+                -- build on save: can be activated, but it's recommended to use
+                -- a build step for that: https://zigtools.org/zls/guides/build-on-save/
+                -- enable_build_on_save = true
+            },
+        },
+    },
 }
 
 --- Returns a list of LSP server names to be installed with Mason

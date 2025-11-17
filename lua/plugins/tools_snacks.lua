@@ -60,8 +60,16 @@ return {
         notifier = {
             enabled = true,
             filter = function(n)
-                -- disabled; LSP hover triggers this notification
-                return n.msg ~= "No information available"
+                -- hide the following messages
+                local ignored_messages = {
+                    -- tends to happen when "hover" over code returns no results
+                    ["No information available"] = true,
+                    -- some LSPs (looking at you ZLS) are very "yappy" if no
+                    -- code actions can be found for the current file
+                    ["No code actions available"] = true,
+                }
+
+                return not ignored_messages[n.msg]
             end,
         },
 
