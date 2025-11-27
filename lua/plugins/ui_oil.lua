@@ -3,6 +3,8 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     enabled = not vim.g.vscode,
     config = function()
+        local border_style = require "config.plugins".border_style
+
         require("oil").setup {
             default_file_explorer = true,
             skip_confirm_for_simple_edits = true,
@@ -31,6 +33,13 @@ return {
 
                     return startsWithDot or nodeModules or rustBuilds
                 end,
+            },
+
+            float = {
+                border = border_style,
+            },
+            confirmation = {
+                border = border_style,
             },
         }
 
