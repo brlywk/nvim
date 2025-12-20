@@ -30,8 +30,9 @@ return {
                     local startsWithDot = vim.startswith(name, ".")
                     local nodeModules = vim.startswith(name, "node_modules")
                     local rustBuilds = name == "target"
+                    local godotIdFile = vim.endswith(name, ".gd.uid")
 
-                    return startsWithDot or nodeModules or rustBuilds
+                    return startsWithDot or nodeModules or rustBuilds or godotIdFile
                 end,
             },
 

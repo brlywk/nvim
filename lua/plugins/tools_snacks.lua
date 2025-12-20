@@ -75,7 +75,7 @@ return {
 
         picker = {
             enabled = true,
-            exclude = { "node_modules" },
+            exclude = { "node_modules", "**/*.gd.uid", },
         },
 
         quickfile = { enabled = true },

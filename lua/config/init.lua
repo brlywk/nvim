@@ -15,5 +15,8 @@ require "config.keymap"
 -- load autocommands
 require "config.autocommands"
 
+-- check if we are within a Godot project and do some extra setup
+require "config.godot"
+
 -- keep this last: load lazy.vim to load plugins
 require "config.lazy"
