@@ -4,27 +4,22 @@ return {
     enabled = true,
     config = function()
         ---- Formatter settings ----
-        local prettier = { "prettier", lsp_format = "fallback", stop_after_first = true }
-        local prettier_cfg = {
-            require_cwd = true,
-            cwd = require("conform.util").root_file {
-                ".prettierrc",
-                ".prettierrc.json",
-                ".prettierrc.yml",
-                ".prettierrc.yaml",
-                ".prettierrc.json5",
-                ".prettierrc.js",
-                ".prettierrc.cjs",
-                ".prettierrc.mjs",
-                ".prettierrc.toml",
-                "prettier.config.js",
-                "prettier.config.cjs",
-                "prettier.config.mjs",
-            },
-        }
+        local helper = require "config.helper"
+
+        -- use biome or prettier, depending on which is configured
+        local function biome_or_prettier()
+            if helper.is_biome_project() then
+                return { lsp_format = "prefer", stop_after_first = true }
+            elseif helper.is_prettier_project() then
+                return { "prettier", lsp_format = "fallback", stop_after_first = true }
+            else
+                return { lsp_format = "prefer" }
+            end
+        end
 
         ---- Setup autoformatting ----
         local conform = require "conform"
+
         local on_save_settings = {
             timeout_ms = 1000,
             lsp_fallback = true,
@@ -61,11 +56,7 @@ return {
                     stdin = true,
                 },
 
-                prettier = prettier_cfg,
-
-                -- rustfmt = {
-                --     args = { "--edition", "2024" },
-                -- },
+                prettier = { require_cwd = true, cwd = require "conform.util".root_file(helper.prettier_config_files) },
 
                 ["sql-formatter"] = {
                     command = "sql-formatter",
@@ -95,21 +86,23 @@ return {
 
                 gdscript = { "gdformat" },
 
-                html = prettier,
-                css = prettier,
-                scss = prettier,
+                html = biome_or_prettier,
+                css = biome_or_prettier,
+                scss = biome_or_prettier,
 
-                javascript = prettier,
-                typescript = prettier,
-                javascriptreact = prettier,
-                typescriptreact = prettier,
+                javascript = biome_or_prettier,
+                typescript = biome_or_prettier,
+                javascriptreact = biome_or_prettier,
+                typescriptreact = biome_or_prettier,
 
-                astro = prettier,
-                svelte = prettier,
+                astro = biome_or_prettier,
+                svelte = biome_or_prettier,
                 vue = { lsp_format = "prefer", stop_after_first = true }, -- vue and prettier don't like each other
 
-                json = prettier,
-                markdown = prettier,
+                json = biome_or_prettier,
+                jsonc = biome_or_prettier,
+                markdown = biome_or_prettier,
+
                 yaml = { "yamlfix" },
                 toml = { "taplo" },
                 sql = { "sql-formatter" },

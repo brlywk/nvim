@@ -32,4 +32,31 @@ M.check_git = function()
     return git_dir ~= ""
 end
 
+
+---Files used to identify a project using biome.
+M.biome_config_files = { "biome.json", "biome.jsonc" }
+---Files used to identify a project using prettier.
+M.prettier_config_files = {
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.js",
+    ".prettierrc.cjs",
+    ".prettierrc.mjs",
+    ".prettierrc.toml",
+    "prettier.config.js",
+    "prettier.config.cjs",
+    "prettier.config.mjs",
+}
+
+M.is_biome_project = function()
+    return vim.fs.root(0, M.biome_config_files) ~= nil
+end
+
+M.is_prettier_project = function()
+    return vim.fs.root(0, M.prettier_config_files) ~= nil
+end
+
 return M

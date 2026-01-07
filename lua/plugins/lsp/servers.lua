@@ -15,6 +15,11 @@ M.servers = {
         config = {},
     },
 
+    biome = {
+        ensure_installed = true,
+        config = {},
+    },
+
     -- C / C++
     clangd = {
         ensure_installed = false,
