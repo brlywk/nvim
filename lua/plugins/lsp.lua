@@ -129,6 +129,12 @@ return {
                         navic.attach(client, bufnr)
                     end
                 end
+
+                -- setup TypeScript twoslash-queries
+                local twoslash_installed, twoslash = pcall(require, "twoslash-queries")
+                if twoslash_installed and client.name == "ts_ls" then
+                    twoslash.attach(client, bufnr)
+                end
             end,
         })
 
