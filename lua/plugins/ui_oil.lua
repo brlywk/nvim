@@ -3,7 +3,7 @@ return {
     dependencies = { "nvim-tree/nvim-web-devicons" },
     enabled = not vim.g.vscode,
     config = function()
-        local border_style = require "config.plugins".border_style
+        local border_style = require("config.plugins").border_style
 
         require("oil").setup {
             default_file_explorer = true,
@@ -31,8 +31,9 @@ return {
                     local nodeModules = vim.startswith(name, "node_modules")
                     local rustBuilds = name == "target"
                     local godotIdFile = vim.endswith(name, ".gd.uid")
+                    local cssModuleTypeDef = vim.endswith(name, ".module.css.d.ts")
 
-                    return startsWithDot or nodeModules or rustBuilds or godotIdFile
+                    return startsWithDot or nodeModules or rustBuilds or godotIdFile or cssModuleTypeDef
                 end,
             },
 

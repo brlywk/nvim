@@ -41,6 +41,11 @@ M.servers = {
         },
     },
 
+    cssls = {
+        ensure_installed = true,
+        config = {},
+    },
+
     emmet_ls = {
         ensure_installed = true,
         config = {},
@@ -55,7 +60,7 @@ M.servers = {
         ensure_installed = false,
         config = {
             name = "Godot",
-            cmd = vim.lsp.rpc.connect('127.0.0.1', 6005),
+            cmd = vim.lsp.rpc.connect("127.0.0.1", 6005),
             workspace_required = true,
             root_dir = function(bufnr, on_dir)
                 on_dir(vim.fs.root(bufnr, { { "project.godot" }, ".git" }))
