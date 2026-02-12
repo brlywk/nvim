@@ -1,4 +1,5 @@
 ---@diagnostic disable:missing-fields,param-type-mismatch,assign-type-mismatch
+---@diagnostic disable:undefined-global
 return {
     "hrsh7th/nvim-cmp",
     event = "InsertEnter",

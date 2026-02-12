@@ -1,4 +1,9 @@
---- @diagnostic disable:undefined-global
+local ls = require "luasnip"
+local i = ls.insert_node
+local s = ls.snippet
+local fmta = require("luasnip.extras.fmt").fmta
+local rep = require("luasnip.extras").rep
+
 return {
     -- if error
     s(

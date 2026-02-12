@@ -1,7 +1,9 @@
----@diagnostic disable:undefined-global
+local ls = require "luasnip"
+local i = ls.insert_node
+local s = ls.snippet
+local fmt = require("luasnip.extras.fmt").fmt
+
 return {
-    -- functions
-    -- arrow functions
     -- console.log
     s(
         "cl",
@@ -17,6 +19,15 @@ return {
         fmt(
             [[
 			console.error({})
+		]],
+            { i(0) }
+        )
+    ),
+    s(
+        "ct",
+        fmt(
+            [[
+			console.table({})
 		]],
             { i(0) }
         )

@@ -1,4 +1,8 @@
---- @diagnostic disable:undefined-global
+local ls = require "luasnip"
+local i = ls.insert_node
+local s = ls.snippet
+local fmt = require("luasnip.extras.fmt").fmt
+
 return {
     -- export react component
     s(
@@ -6,7 +10,7 @@ return {
         fmt(
             [[
 			export default function {}({}) {{
-				{}	
+				{}
 
 				return <></>
 			}}
@@ -27,7 +31,7 @@ return {
 			"use client";
 
 			export default function {}({}) {{
-				{}	
+				{}
 
 				return <></>
 			}}

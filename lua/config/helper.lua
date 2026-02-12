@@ -1,3 +1,4 @@
+---@diagnostic disable:undefined-global
 local M = {}
 
 ---Format the cmd_name given as a command that can be run (e.g. in Keymaps)
@@ -32,7 +33,6 @@ M.check_git = function()
     return git_dir ~= ""
 end
 
-
 ---Files used to identify a project using biome.
 M.biome_config_files = { "biome.json", "biome.jsonc" }
 ---Files used to identify a project using prettier.
@@ -57,6 +57,20 @@ end
 
 M.is_prettier_project = function()
     return vim.fs.root(0, M.prettier_config_files) ~= nil
+end
+
+M.get_comment_chars = function()
+    local cstring = vim.bo.commentstring
+    if not cstring or cstring == "" then
+        cstring = "// %s"
+    end
+
+    -- get part before %s
+    local start_part = cstring:match "^(.*)%%s" or cstring
+    start_part = vim.trim(start_part)
+    local repeat_char = start_part:sub(-1, -1)
+
+    return start_part, repeat_char
 end
 
 return M

@@ -18,11 +18,11 @@ return {
             h = { "clangtidy" },
             hh = { "clangtidy" },
             hpp = { "clangtidy" },
-            lua = { "luacheck" },
+            -- lua = { "luacheck" },
         }
 
         -- setup eslint
-        local eslint = lint.linters.eslint;
+        local eslint = lint.linters.eslint
         ---@diagnostic disable-next-line: assign-type-mismatch
         eslint.cmd = function()
             local eslint_bin = vim.fn.getcwd() .. "/node_modules/.bin/eslint"
@@ -42,7 +42,7 @@ return {
                     return
                 end
 
-                lint.try_lint("eslint")
+                lint.try_lint "eslint"
             else
                 -- no "web format", call pre-configured linter
                 lint.try_lint()

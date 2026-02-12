@@ -1,4 +1,8 @@
---- @diagnostic disable:undefined-global
+local ls = require "luasnip"
+local i = ls.insert_node
+local s = ls.snippet
+local fmt = require("luasnip.extras.fmt").fmt
+
 return {
     s(
         "h!",
@@ -13,7 +17,7 @@ return {
 				<link href="{}" rel="stylesheet">
 			</head>
 			<body>
-				{}	
+				{}
 			</body>
 		</html>
 		]],
