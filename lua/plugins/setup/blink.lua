@@ -32,6 +32,7 @@ require("blink.cmp").setup {
             },
         },
         menu = {
+            auto_show_delay_ms = 150, -- test out slight delay before completion menu is shown...
             border = border_style,
             draw = {
                 gap = 4,
@@ -73,4 +74,3 @@ require("blink.cmp").setup {
 
     fuzzy = { implementation = "prefer_rust_with_warning" },
 }
-

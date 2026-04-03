@@ -1,1 +1,3 @@
-require("go").setup()
+require("go").setup({
+    lsp_codelens = false,
+})

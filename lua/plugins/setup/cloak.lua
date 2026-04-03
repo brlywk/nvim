@@ -1,1 +1,1 @@
-require "cloak".setup {}
+require("cloak").setup {}

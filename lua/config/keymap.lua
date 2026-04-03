@@ -7,7 +7,7 @@ local set_opts = require("config.helper").set_opts
 --------------------------------------------------------------------------------
 
 -- single delete to the void
-set("n", "x", '"_x')
+set("n", "x", "\"_x")
 -- line-break aware j and k
 set({ "n", "x" }, "k", "v:count == 0 ? 'gk' : 'k'", set_opts("", true))
 set({ "n", "x" }, "j", "v:count == 0 ? 'gj' : 'j'", set_opts("", true))

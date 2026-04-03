@@ -5,23 +5,6 @@
 vim.lsp.enable(require("config.lsp_servers").enable_servers)
 
 --------------------------------------------------------------------------------
--- User commands (nvim-lspconfig equivalents for native LSP)
---------------------------------------------------------------------------------
-
-vim.api.nvim_create_user_command("LspRestart", function()
-    vim.lsp.stop_client(vim.lsp.get_clients { bufnr = 0 })
-    vim.defer_fn(function() vim.cmd "do FileType" end, 200)
-end, { desc = "Restart LSP clients for current buffer" })
-
-vim.api.nvim_create_user_command("LspInfo", function()
-    vim.cmd "checkhealth vim.lsp"
-end, { desc = "Show LSP client info" })
-
-vim.api.nvim_create_user_command("LspLog", function()
-    vim.cmd("edit " .. vim.lsp.get_log_path())
-end, { desc = "Open LSP log file" })
-
---------------------------------------------------------------------------------
 -- Global config (runs once)
 --------------------------------------------------------------------------------
 
@@ -86,3 +69,25 @@ vim.api.nvim_create_autocmd("LspAttach", {
         end, opts)
     end,
 })
+
+--------------------------------------------------------------------------------
+-- User commands (nvim-lspconfig equivalents for native LSP)
+--------------------------------------------------------------------------------
+
+vim.api.nvim_create_user_command("LspRestart", function()
+    local clients = vim.lsp.get_clients { bufnr = 0 }
+    for _, client in ipairs(clients) do
+        client:stop()
+    end
+    vim.defer_fn(function()
+        vim.cmd "do FileType"
+    end, 200)
+end, { desc = "Restart LSP clients for current buffer" })
+
+vim.api.nvim_create_user_command("LspInfo", function()
+    vim.cmd "checkhealth vim.lsp"
+end, { desc = "Show LSP client info" })
+
+vim.api.nvim_create_user_command("LspLog", function()
+    vim.cmd("edit " .. vim.lsp.log.get_filename())
+end, { desc = "Open LSP log file" })

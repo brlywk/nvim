@@ -16,4 +16,3 @@ require("luasnip.loaders.from_lua").load { paths = snippet_dir }
 luasnip.filetype_extend("typescript", { "javascript" })
 luasnip.filetype_extend("javascriptreact", { "javascript" })
 luasnip.filetype_extend("typescriptreact", { "javascriptreact" })
-

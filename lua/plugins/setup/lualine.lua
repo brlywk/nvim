@@ -1,4 +1,7 @@
--- helper to get name of the current file and it's parent directory
+--------------------------------------------------------------------------------
+-- Helpers
+--------------------------------------------------------------------------------
+-- get name of the current file and its parent directory
 local file_name_with_parent_dir = function()
     local file_name = vim.fn.expand "%:t"
     local file_path = vim.fn.expand "%:p"

@@ -20,7 +20,7 @@ end
 M.setup_theme = function(name, opts)
     vim.api.nvim_create_autocmd("ColorScheme", {
         group = vim.api.nvim_create_augroup("theme_change", { clear = true }),
-        callback = M.highlight_overrides
+        callback = M.highlight_overrides,
     })
 
     require(name).setup(opts)

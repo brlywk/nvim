@@ -31,31 +31,16 @@ conform.setup {
 
     -- overwrite settings for some formatters
     formatters = {
-        clangd_tidy = {
-            command = "clang-tidy",
-            args = {
-                "--fix",
-                "--fix-errors",
-                "--format-style=file",
-                "--header-filter=.*",
-                "$FILENAME",
-            },
-            stdin = false,
-            exit_codes = { 0, 1 },
-            cwd = require("conform.util").root_file {
-                "compile_commands.json",
-                ".clang-tidy",
-                "CMakeLists.txt",
-            },
-        },
-
         odinfmt = {
             command = vim.fn.expand "$HOME/.odin_lsp/odinfmt",
             args = { "-stdin" },
             stdin = true,
         },
 
-        prettier = { require_cwd = true, cwd = require("conform.util").root_file(helper.prettier_config_files) },
+        prettier = {
+            require_cwd = true,
+            cwd = require("conform.util").root_file(helper.prettier_config_files),
+        },
 
         ["sql-formatter"] = {
             command = "sql-formatter",
@@ -67,12 +52,6 @@ conform.setup {
                 },
             },
         },
-
-        zigfmt = {
-            command = "zig",
-            args = { "fmt", "--stdin" },
-            stdin = true,
-        },
     },
 
     -- which settings to use for autoformatting
@@ -82,7 +61,6 @@ conform.setup {
         go = { "gofmt" },
         odin = { "odinfmt", lsp_format = "fallback" },
         rust = { "rustfmt" },
-        zig = { lsp_format = "prefer" },
 
         html = biome_or_prettier,
         css = biome_or_prettier,
@@ -117,7 +95,7 @@ conform.setup {
     },
 
     -- autoformat on save settings
-    format_on_save = on_save_settings,
+    format_after_save = on_save_settings,
 }
 
 --------------------------------------------------------------------------------
