@@ -3,6 +3,9 @@
 --------------------------------------------------------------------------------
 local helper = require "config.helper"
 
+-- NOTE: After some testing, Biome is "okay-ish", so maybe look into replacing
+-- everything with oxfmt (from oxc.rs): https://oxc.rs/docs/guide/usage/formatter/editors.html#neovim
+
 -- use biome or prettier, depending on which is configured
 local function biome_or_prettier()
     if helper.is_biome_project() then

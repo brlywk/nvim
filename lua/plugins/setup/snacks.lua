@@ -30,19 +30,24 @@ require("snacks").setup {
                     action = ":lua Snacks.dashboard.pick('oldfiles')",
                 },
                 {
+                    icon = "󰏗",
+                    key = "P",
+                    desc = "Update Plugins",
+                    action = ":PackUpdate",
+                },
+                {
+                    icon = "",
+                    key = "M",
+                    desc = "Mason",
+                    action = ":Mason",
+                },
+                {
                     icon = " ",
                     key = "c",
                     desc = "Config",
                     action = ":lua Snacks.dashboard.pick('files', {cwd = vim.fn.stdpath('config')})",
                 },
                 { icon = " ", key = "s", desc = "Restore Session", section = "session" },
-                {
-                    icon = "󰒲 ",
-                    key = "L",
-                    desc = "Lazy",
-                    action = ":Lazy",
-                    enabled = package.loaded.lazy ~= nil,
-                },
                 { icon = " ", key = "q", desc = "Quit", action = ":qa" },
             },
         },
@@ -226,9 +231,6 @@ end, set_opts "Notifications")
 set("n", "<leader>va", function()
     Snacks.picker.autocmds()
 end, set_opts "Autocmds")
-set("n", "<leader>vp", function()
-    Snacks.picker.lazy()
-end, set_opts "Plugins")
 set("n", "<leader>vr", function()
     Snacks.picker.registers()
 end, set_opts "Registers")

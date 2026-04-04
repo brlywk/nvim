@@ -5,9 +5,11 @@ vim.pack.add {
     -- theme
     "https://github.com/catppuccin/nvim",
 
-    -- the one and only...
+    -- the one and only treesitter...
     "https://github.com/nvim-treesitter/nvim-treesitter",
     "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
+    "https://github.com/windwp/nvim-ts-autotag",
+    "https://github.com/folke/ts-comments.nvim",
 
     -- dependencies
     "https://github.com/nvim-tree/nvim-web-devicons", -- ...what isn't using this?!
@@ -48,23 +50,15 @@ vim.pack.add {
 }
 
 --------------------------------------------------------------------------------
--- Hooks (must run to build plugins etc.)
+-- Hooks
 --------------------------------------------------------------------------------
--- taken from this fantastic blog: https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html#hooks
+-- see: https://echasnovski.com/blog/2026-03-13-a-guide-to-vim-pack.html#hooks
 vim.api.nvim_create_autocmd("PackChanged", {
-    callback = function(ev)
-        local name, kind = ev.data.spec.name, ev.data.kind
-        if name == "nvim-treesitter" and kind == "update" then
-            if not ev.data.active then
-                vim.cmd.packadd "nvim-treesitter"
-            end
-            vim.cmd "TSUpdate"
-        end
-    end,
+    callback = require("plugins.hooks").callback,
 })
 
 --------------------------------------------------------------------------------
--- Theme (must run first)
+-- Theme (must run before any other plugins)
 --------------------------------------------------------------------------------
 require("plugins.theme").setup_theme("catppuccin", {
     flavour = "mocha",
@@ -77,6 +71,11 @@ require("plugins.theme").setup_theme("catppuccin", {
         }
     end,
 })
+
+--------------------------------------------------------------------------------
+-- Custom commands
+--------------------------------------------------------------------------------
+vim.api.nvim_create_user_command("PackUpdate", ":lua vim.pack.update()", { desc = "Update all installed plugins" })
 
 --------------------------------------------------------------------------------
 -- Setup plugins
