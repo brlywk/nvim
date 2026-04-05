@@ -48,6 +48,12 @@ set("n", "<leader>ch", function()
     vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled())
 end, set_opts "Toggle inlay hints")
 
+-- virtual text
+set("n", "<leader>cv", function()
+    local new_config = not vim.diagnostic.config().virtual_lines
+    vim.diagnostic.config { virtual_lines = new_config }
+end, set_opts "Toggle virtual text")
+
 -- show or hide cursorline
 set("n", "<leader><leader>-", function()
     if vim.wo.cursorlineopt == "number" then

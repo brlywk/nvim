@@ -18,6 +18,7 @@ local ignore_prefix = {
     "snacks_",
     "blink-",
     "conform-",
+    "oil_",
 }
 
 -- as a lazy developer, let's just handle treesitter all the work;
