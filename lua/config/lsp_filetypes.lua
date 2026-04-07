@@ -3,13 +3,11 @@ local M = {}
 M.javascript = {
     "javascript",
     "javascriptreact",
-    "javascript.jsx",
 }
 
 M.typescript = {
     "typescript",
     "typescriptreact",
-    "typescript.tsx",
 }
 
 M.json = {
