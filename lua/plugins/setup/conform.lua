@@ -3,19 +3,25 @@
 --------------------------------------------------------------------------------
 local helper = require "config.helper"
 
--- NOTE: After some testing, Biome is "okay-ish", so maybe look into replacing
--- everything with oxfmt (from oxc.rs): https://oxc.rs/docs/guide/usage/formatter/editors.html#neovim
+local prettier_config_files = {
+    ".prettierrc",
+    ".prettierrc.json",
+    ".prettierrc.yml",
+    ".prettierrc.yaml",
+    ".prettierrc.json5",
+    ".prettierrc.js",
+    ".prettierrc.cjs",
+    ".prettierrc.mjs",
+    ".prettierrc.toml",
+    "prettier.config.js",
+    "prettier.config.cjs",
+    "prettier.config.mjs",
+}
 
--- use biome or prettier, depending on which is configured
-local function biome_or_prettier()
-    if helper.is_biome_project() then
-        return { lsp_format = "prefer", stop_after_first = true }
-    elseif helper.is_prettier_project() then
-        return { "prettier", lsp_format = "fallback", stop_after_first = true }
-    else
-        return { lsp_format = "prefer" }
-    end
-end
+-- NOTE: Biome is only so-so, so hardcode prettier for now but check out oxfmt /
+-- oxlint (oxc.rs) and adjust config to use oxfmt first and prettier afterwards
+-- or sth...
+local prettier_config = { "prettier", lsp_format = "fallback", stop_after_first = true }
 
 --------------------------------------------------------------------------------
 -- Setup
@@ -42,7 +48,7 @@ conform.setup {
 
         prettier = {
             require_cwd = true,
-            cwd = require("conform.util").root_file(helper.prettier_config_files),
+            cwd = require("conform.util").root_file(prettier_config_files),
         },
 
         ["sql-formatter"] = {
@@ -65,21 +71,21 @@ conform.setup {
         odin = { "odinfmt", lsp_format = "fallback" },
         rust = { "rustfmt" },
 
-        html = biome_or_prettier,
-        css = biome_or_prettier,
-        scss = biome_or_prettier,
+        html = prettier_config,
+        css = prettier_config,
+        scss = prettier_config,
 
-        javascript = biome_or_prettier,
-        typescript = biome_or_prettier,
-        javascriptreact = biome_or_prettier,
-        typescriptreact = biome_or_prettier,
+        javascript = prettier_config,
+        typescript = prettier_config,
+        javascriptreact = prettier_config,
+        typescriptreact = prettier_config,
 
-        svelte = biome_or_prettier,
+        svelte = prettier_config,
         vue = { lsp_format = "prefer", stop_after_first = true }, -- vue and prettier don't like each other
 
-        json = biome_or_prettier,
-        jsonc = biome_or_prettier,
-        markdown = biome_or_prettier,
+        json = prettier_config,
+        jsonc = prettier_config,
+        markdown = prettier_config,
 
         yaml = { "yamlfix" },
         toml = { "taplo" },

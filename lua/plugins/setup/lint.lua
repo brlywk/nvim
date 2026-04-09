@@ -27,11 +27,6 @@ local function lint_callback()
     -- if we have a "web format", check which linter to call
     local ft = vim.bo.filetype
     if vim.tbl_contains(web_formats, ft) then
-        -- biome linting is handled via LSP diagnostics
-        if helper.is_biome_project() then
-            return
-        end
-
         lint.try_lint "eslint"
     else
         -- no "web format", call pre-configured linter
