@@ -100,7 +100,7 @@ return {
         fmta(
             [[
             func Test<name>(t *testing.T) {
-                tests := []struct{
+                testCases := []struct{
                     name string
                     <tcdef>
                 }{
@@ -108,7 +108,7 @@ return {
                 }
 
                 for _, tc := range testCases {
-                    t.Run(tt.name, func(t *testing.T){
+                    t.Run(tc.name, func(t *testing.T){
                         <done>
                     })
                 }

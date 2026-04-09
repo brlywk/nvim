@@ -26,6 +26,10 @@
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
       "src": "https://github.com/stevearc/conform.nvim"
     },
+    "defold.nvim": {
+      "rev": "ab0f9332170fd1b13314608b76cd258a3187fe38",
+      "src": "https://github.com/atomicptr/defold.nvim"
+    },
     "fidget.nvim": {
       "rev": "889e2e96edef4e144965571d46f7a77bcc4d0ddf",
       "src": "https://github.com/j-hui/fidget.nvim"
@@ -49,6 +53,10 @@
     "lazydev.nvim": {
       "rev": "ff2cbcba459b637ec3fd165a2be59b7bbaeedf0d",
       "src": "https://github.com/folke/lazydev.nvim"
+    },
+    "love2d.nvim": {
+      "rev": "25715394680590f56aab90390d430cab0dc46808",
+      "src": "https://github.com/S1M0N38/love2d.nvim"
     },
     "lualine.nvim": {
       "rev": "74114f0df664f14d7c228945693ba68a3b70a794",

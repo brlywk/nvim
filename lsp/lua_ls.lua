@@ -8,8 +8,6 @@ return {
         ".luacheckrc",
         ".stylua.toml",
         "stylua.toml",
-        "selene.toml",
-        "selene.yml",
         ".git",
     },
     settings = {
