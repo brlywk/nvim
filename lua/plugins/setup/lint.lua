@@ -11,7 +11,7 @@ lint.linters_by_ft = {
     --
 }
 
--- setup eslint
+-- setup eslint (use project version if found, global daemon otherwise)
 local eslint = lint.linters.eslint
 ---@diagnostic disable-next-line: assign-type-mismatch
 eslint.cmd = function()
@@ -20,7 +20,7 @@ eslint.cmd = function()
         return eslint_bin
     end
 
-    return "eslint"
+    return "eslint_d"
 end
 
 local function lint_callback()

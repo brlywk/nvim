@@ -12,7 +12,6 @@ M.enable_servers = {
 
     -- web stuff
     "ts_ls",
-    "biome",
     "emmet_ls",
     "html",
     "css_ls",
