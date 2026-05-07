@@ -7,7 +7,6 @@ opt.cursorlineopt = "number"
 opt.scrolloff = 8
 opt.inccommand = "split"
 opt.showtabline = 0 -- never show tabline on top
-opt.clipboard = "unnamedplus"
 opt.expandtab = true
 opt.tabstop = 4
 opt.softtabstop = 4
@@ -29,3 +28,8 @@ opt.fillchars = { eob = " " }
 opt.updatetime = 250
 opt.textwidth = 80
 opt.formatoptions:append "c" -- automatically wrap comments
+
+-- schedule settings to improve startup times
+vim.schedule(function()
+    vim.o.clipboard = "unnamedplus"
+end)

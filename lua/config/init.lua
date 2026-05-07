@@ -1,3 +1,6 @@
+-- speedup startup by caching compiled lua modules
+vim.loader.enable()
+
 -- important to set mapleader first so that plugins etc.
 -- use the correct mapleader key
 vim.g.mapleader = " "

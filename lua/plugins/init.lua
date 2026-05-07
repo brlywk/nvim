@@ -1,52 +1,54 @@
 --------------------------------------------------------------------------------
 -- Install plugins
 --------------------------------------------------------------------------------
+local gh = require("config.helper").github_url
+
 vim.pack.add {
     -- theme
-    "https://github.com/catppuccin/nvim",
+    gh "catppuccin/nvim",
 
     -- the one and only treesitter...
-    "https://github.com/nvim-treesitter/nvim-treesitter",
-    "https://github.com/nvim-treesitter/nvim-treesitter-textobjects",
-    "https://github.com/windwp/nvim-ts-autotag",
-    "https://github.com/folke/ts-comments.nvim",
+    gh "nvim-treesitter/nvim-treesitter",
+    gh "nvim-treesitter/nvim-treesitter-textobjects",
+    gh "windwp/nvim-ts-autotag",
+    gh "folke/ts-comments.nvim",
 
     -- dependencies
-    "https://github.com/nvim-tree/nvim-web-devicons", -- ...what isn't using this?!
-    "https://github.com/nvim-lua/plenary.nvim", -- ...same here
-    "https://github.com/SmiteshP/nvim-navic", -- incline.nvim
-    "https://github.com/b0o/SchemaStore.nvim", -- used in LSP setup to load schema
+    gh "nvim-tree/nvim-web-devicons", -- ...what isn't using this?!
+    gh "nvim-lua/plenary.nvim", -- ...same here
+    gh "SmiteshP/nvim-navic", -- incline.nvim
+    gh "b0o/SchemaStore.nvim", -- used in LSP setup to load schema
 
     -- plugins
-    "https://github.com/echasnovski/mini.nvim", -- keep high in list, this is also a dependency for some other plugins
-    "https://github.com/stevearc/oil.nvim",
-    "https://github.com/williamboman/mason.nvim",
-    "https://github.com/WhoIsSethDaniel/mason-tool-installer.nvim",
-    "https://github.com/nvim-lualine/lualine.nvim",
-    "https://github.com/j-hui/fidget.nvim",
-    "https://github.com/b0o/incline.nvim",
-    "https://github.com/folke/lazydev.nvim",
-    "https://github.com/folke/snacks.nvim",
-    "https://github.com/folke/which-key.nvim",
-    "https://github.com/folke/todo-comments.nvim",
-    "https://github.com/folke/trouble.nvim",
-    "https://github.com/otavioschwanck/arrow.nvim",
-    "https://github.com/lewis6991/gitsigns.nvim",
-    { src = "https://github.com/L3MON4D3/LuaSnip", version = vim.version.range "v2.x" },
-    { src = "https://github.com/Saghen/blink.cmp", version = vim.version.range "1.x" },
-    "https://github.com/windwp/nvim-autopairs",
-    "https://github.com/laytan/cloak.nvim",
-    "https://github.com/kylechui/nvim-surround",
-    "https://github.com/stevearc/conform.nvim",
-    "https://github.com/mfussenegger/nvim-lint",
-    "https://github.com/danymat/neogen",
+    gh "echasnovski/mini.nvim", -- keep high in list, this is also a dependency for some other plugins
+    gh "stevearc/oil.nvim",
+    gh "williamboman/mason.nvim",
+    gh "WhoIsSethDaniel/mason-tool-installer.nvim",
+    gh "nvim-lualine/lualine.nvim",
+    gh "j-hui/fidget.nvim",
+    gh "b0o/incline.nvim",
+    gh "folke/lazydev.nvim",
+    gh "folke/snacks.nvim",
+    gh "folke/which-key.nvim",
+    gh "folke/todo-comments.nvim",
+    gh "folke/trouble.nvim",
+    gh "otavioschwanck/arrow.nvim",
+    gh "lewis6991/gitsigns.nvim",
+    { src = gh "L3MON4D3/LuaSnip", version = vim.version.range "v2.x" },
+    { src = gh "Saghen/blink.cmp", version = vim.version.range "1.x" },
+    gh "windwp/nvim-autopairs",
+    gh "laytan/cloak.nvim",
+    gh "kylechui/nvim-surround",
+    gh "stevearc/conform.nvim",
+    gh "mfussenegger/nvim-lint",
+    gh "danymat/neogen",
 
     ---- language specific
     -- Gophers!
-    "https://github.com/ray-x/guihua.lua",
-    "https://github.com/ray-x/go.nvim",
+    gh "ray-x/guihua.lua",
+    gh "ray-x/go.nvim",
     -- TypeScript
-    "https://github.com/marilari88/twoslash-queries.nvim",
+    gh "marilari88/twoslash-queries.nvim",
 }
 
 --------------------------------------------------------------------------------

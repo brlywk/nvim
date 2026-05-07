@@ -49,8 +49,8 @@ M.check_git = function()
 end
 
 ---Returns the correct comment chars for the current buffer / language.
----@return string Proper starting comment string, e.g. "//"
----@return string Reapating char to use, e.g. "/"
+---@return string start_part Proper starting comment string, e.g. "//"
+---@return string repeat_char Reapating char to use, e.g. "/"
 M.get_comment_chars = function()
     local cstring = vim.bo.commentstring
     if not cstring or cstring == "" then
@@ -63,6 +63,13 @@ M.get_comment_chars = function()
     local repeat_char = start_part:sub(-1, -1)
 
     return start_part, repeat_char
+end
+
+---Returns a full github.com URL for the provided repo
+---@param repo string Name of the repo, e.g. "folke/snacks.nvim"
+---@return string URL Full github.com URL, e.g. https://github.com/folke/snacks.nvim
+M.github_url = function(repo)
+    return "https://github.com/" .. repo
 end
 
 return M
