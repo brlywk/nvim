@@ -23,31 +23,6 @@ M.set_opts = function(desc, expr, noremap, silent)
     return { noremap = noremap, expr = expr, silent = silent, desc = desc }
 end
 
----Filter out all keys provided from the table.
----`vim.tbl_filter()` does not really do what I need for some things
----@param table any Really... ANY table
----@param ... string A list of table keys that should be filtered out
----@return table
-M.filter_keys = function(table, ...)
-    local remove_keys = { ... }
-    local filtered_table = {}
-
-    for key, value in pairs(table) do
-        if not vim.list_contains(remove_keys, key) then
-            filtered_table[key] = value
-        end
-    end
-
-    return filtered_table
-end
-
----Check if the current directory is git controlled.
----@return boolean
-M.check_git = function()
-    local git_dir = vim.fn.finddir(".git", ".;")
-    return git_dir ~= ""
-end
-
 ---Returns the correct comment chars for the current buffer / language.
 ---@return string start_part Proper starting comment string, e.g. "//"
 ---@return string repeat_char Reapating char to use, e.g. "/"
@@ -70,6 +45,25 @@ end
 ---@return string URL Full github.com URL, e.g. https://github.com/folke/snacks.nvim
 M.github_url = function(repo)
     return "https://github.com/" .. repo
+end
+
+---Merges multiple lists into one
+---@param ... any[]
+---@return any[]
+M.merge = function(...)
+    local result = {}
+    for _, list in ipairs { ... } do
+        vim.list_extend(result, list)
+    end
+    return result
+end
+
+---Check if the current directories is the root directory for a list of marker
+---files
+---@param root_markers string[] List of marker files to check for
+---@return boolean
+M.has_root = function(root_markers)
+    return vim.fs.root(0, root_markers) ~= nil
 end
 
 return M

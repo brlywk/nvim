@@ -1,27 +1,9 @@
 --------------------------------------------------------------------------------
 -- Helper
 --------------------------------------------------------------------------------
-local helper = require "config.helper"
+local ft = require "config.lsp_filetypes"
 
-local prettier_config_files = {
-    ".prettierrc",
-    ".prettierrc.json",
-    ".prettierrc.yml",
-    ".prettierrc.yaml",
-    ".prettierrc.json5",
-    ".prettierrc.js",
-    ".prettierrc.cjs",
-    ".prettierrc.mjs",
-    ".prettierrc.toml",
-    "prettier.config.js",
-    "prettier.config.cjs",
-    "prettier.config.mjs",
-}
-
--- NOTE: Biome is only so-so, so hardcode prettier for now but check out oxfmt /
--- oxlint (oxc.rs) and adjust config to use oxfmt first and prettier afterwards
--- or sth...
-local prettier_config = { "prettier", lsp_format = "fallback", stop_after_first = true }
+local web_formatter = { "oxfmt", "prettier", lsp_format = "fallback", stop_after_first = true }
 
 --------------------------------------------------------------------------------
 -- Setup
@@ -46,9 +28,14 @@ conform.setup {
             stdin = true,
         },
 
+        oxfmt = {
+            require_cwd = true,
+            cwd = require("conform.util").root_file(ft.config_files.oxfmt),
+        },
+
         prettier = {
             require_cwd = true,
-            cwd = require("conform.util").root_file(prettier_config_files),
+            cwd = require("conform.util").root_file(ft.config_files.prettier),
         },
 
         ["sql-formatter"] = {
@@ -71,21 +58,21 @@ conform.setup {
         odin = { "odinfmt", lsp_format = "fallback" },
         rust = { "rustfmt" },
 
-        html = prettier_config,
-        css = prettier_config,
-        scss = prettier_config,
+        html = web_formatter,
+        css = web_formatter,
+        scss = web_formatter,
 
-        javascript = prettier_config,
-        typescript = prettier_config,
-        javascriptreact = prettier_config,
-        typescriptreact = prettier_config,
+        javascript = web_formatter,
+        typescript = web_formatter,
+        javascriptreact = web_formatter,
+        typescriptreact = web_formatter,
 
-        svelte = prettier_config,
+        svelte = web_formatter,
         vue = { lsp_format = "prefer", stop_after_first = true }, -- vue and prettier don't like each other
 
-        json = prettier_config,
-        jsonc = prettier_config,
-        markdown = prettier_config,
+        json = web_formatter,
+        jsonc = web_formatter,
+        markdown = web_formatter,
 
         yaml = { "yamlfix" },
         toml = { "taplo" },

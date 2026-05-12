@@ -40,15 +40,45 @@ M.yaml = {
     "yaml.gitlab",
 }
 
---- Merges multiple filetype lists into one
----@param ... string[]
----@return string[]
-M.merge = function(...)
-    local result = {}
-    for _, list in ipairs { ... } do
-        vim.list_extend(result, list)
-    end
-    return result
-end
+M.config_files = {
+    oxlint = {
+        ".oxlintrc.json",
+        ".oxlintrc.jsonc",
+        "oxlint.config.ts",
+    },
+    oxfmt = {
+        ".oxfmtrc.json",
+        ".oxfmtrc.jsonc",
+        "oxfmt.config.ts",
+    },
+    eslint = {
+        ".eslintrc",
+        ".eslintrc.js",
+        ".eslintrc.cjs",
+        ".eslintrc.yaml",
+        ".eslintrc.yml",
+        ".eslintrc.json",
+        "eslint.config.js",
+        "eslint.config.mjs",
+        "eslint.config.cjs",
+        "eslint.config.ts",
+        "eslint.config.mts",
+        "eslint.config.cts",
+    },
+    prettier = {
+        ".prettierrc",
+        ".prettierrc.json",
+        ".prettierrc.yml",
+        ".prettierrc.yaml",
+        ".prettierrc.json5",
+        ".prettierrc.js",
+        ".prettierrc.cjs",
+        ".prettierrc.mjs",
+        ".prettierrc.toml",
+        "prettier.config.js",
+        "prettier.config.cjs",
+        "prettier.config.mjs",
+    },
+}
 
 return M

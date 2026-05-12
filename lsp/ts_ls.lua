@@ -1,9 +1,10 @@
 local ft = require "config.lsp_filetypes"
+local merge = require("config.helper").merge
 
 ---@type vim.lsp.Config
 return {
     cmd = { "typescript-language-server", "--stdio" },
-    filetypes = ft.merge(ft.javascript, ft.typescript),
+    filetypes = merge(ft.javascript, ft.typescript),
     root_markers = {
         "tsconfig.json",
         "tsconfig.base.json",

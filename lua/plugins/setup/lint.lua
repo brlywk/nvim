@@ -1,21 +1,27 @@
 --------------------------------------------------------------------------------
 -- Setup
 --------------------------------------------------------------------------------
-local helper = require "config.helper"
 local lint = require "lint"
+local ft = require "config.lsp_filetypes"
+local merge = require("config.helper").merge
+local has_root = require("config.helper").has_root
 
-local web_formats = { "javascript", "javascriptreact", "typescript", "typescriptreact", "svelte" }
+local web_formats = merge(ft.javascript, ft.typescript)
+local eslint_formats = merge(web_formats, { "svelte", "vue", "astro" })
+local oxlint_config_files = ft.config_files.oxlint
+local eslint_config_files = ft.config_files.eslint
 
--- LINTERs to use (note that most LSPs have their own lint functionality anyway)
 lint.linters_by_ft = {
-    --
+    -- add linters here if they are not run as LSP anyway...
 }
 
 -- setup eslint (use project version if found, global daemon otherwise)
 local eslint = lint.linters.eslint
+
+-- find the correct eslint executable to use
 ---@diagnostic disable-next-line: assign-type-mismatch
 eslint.cmd = function()
-    local eslint_bin = vim.fn.getcwd() .. "/node_modules/.bin/eslint"
+    local eslint_bin = vim.fs.joinpath(vim.fn.getcwd(), "/node_modules/.bin/eslint")
     if vim.fn.executable(eslint_bin) == 1 then
         return eslint_bin
     end
@@ -24,12 +30,13 @@ eslint.cmd = function()
 end
 
 local function lint_callback()
-    -- if we have a "web format", check which linter to call
-    local ft = vim.bo.filetype
-    if vim.tbl_contains(web_formats, ft) then
+    local filetype = vim.bo.filetype
+
+    if has_root(oxlint_config_files) and vim.tbl_contains(web_formats, filetype) then
+        lint.try_lint "oxlint"
+    elseif has_root(eslint_config_files) and vim.tbl_contains(eslint_formats, filetype) then
         lint.try_lint "eslint"
     else
-        -- no "web format", call pre-configured linter
         lint.try_lint()
     end
 end

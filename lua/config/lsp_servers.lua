@@ -17,7 +17,7 @@ M.enable_servers = {
     "css_ls",
     "json_ls",
 
-    -- frameworks
+    -- web stuff frameworks
     "svelte",
     "tailwindcss",
 
